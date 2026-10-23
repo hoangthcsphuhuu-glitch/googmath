@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
+  <title>GOOGMATH • Trò Chơi Toán 6 (Bài 9: Dấu Hiệu Chia Hết)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Lesson Switcher Bar -->
+  <nav class="lesson-switcher">
+    <span style="font-size:0.82rem; color:#fde68a; font-weight:800;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
+    <a href="bai8.html" class="lesson-tab">⚖️ Bài 8: Quan hệ chia hết</a>
+    <a href="bai9.html" class="lesson-tab active">🔍 Bài 9: Dấu hiệu chia hết</a>
+    <a href="bai10.html" class="lesson-tab">🌸 Bài 10: Số nguyên tố</a>
+    <a href="index.html" class="lesson-tab">👑 Bài 11: Ước chung &amp; ƯCLN</a>
+    <a href="bai12.html" class="lesson-tab">🚀 Bài 12: Bội chung &amp; BCNN</a>
+    <a href="sotay.html" class="lesson-tab">📖 Sổ Tay Toán 6</a>
+    <a href="tuvan.html" class="lesson-tab">💚 Tư Vấn Khối 6</a>
+  </nav>
+
+  <!-- Top HUD Bar -->
+  <header class="hud-bar">
+    <div class="brand" onclick="App9.showMap()" style="cursor:pointer" title="Về Bản Đồ Chặng">
+      <div class="brand-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">🔍</div>
+      <div class="brand-text">
+        <h1>GOOGMATH • BÀI 9: DẤU HIỆU CHIA HẾT</h1>
+        <p>Toán 6 (Tiết 19–20) • GV: Lý Hoàng Em • Cổng Game Học Tập Tương Tác</p>
+      </div>
+    </div>
+
+    <div class="hud-stats">
+      <div class="stat-pill" id="hud-player">👤 Khách</div>
+      <div class="stat-pill score">🏆 <span id="hud-score">0</span> điểm</div>
+      <div class="stat-pill stars">⭐ <span id="hud-stars">0</span>/15 sao</div>
+      <div class="voice-pill" id="voice-pill" onclick="VoiceNarrator.toggle()" title="Bật/Tắt tự động đọc câu dẫn Tiếng Việt">
+        <span id="voice-label">🗣️ Đọc câu dẫn: Bật</span>
+      </div>
+      <div class="bgm-pill" id="bgm-pill" onclick="BGM.toggle()" title="Bật/Tắt nhạc nền của trò chơi">
+        <div class="eq-bars">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+        <span id="bgm-label">🎵 Nhạc nền: Bật</span>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <a href="sotay.html" class="btn btn-outline btn-sm" style="text-decoration:none;">
+        📖 Sổ tay Toán 6
+      </a>
+      <a href="tuvan.html" class="btn btn-outline btn-sm" style="text-decoration:none;">
+        💚 Tư vấn Khối 6
+      </a>
+      <button class="btn btn-accent btn-sm" onclick="App9.toggleModal('casio-modal')">
+        🧮 Máy quét 2, 3, 5, 9
+      </button>
+      <button class="btn btn-outline btn-sm" id="sound-toggle-btn" onclick="Sound.toggle()">
+        🔊 Hiệu ứng
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <!-- 1. Welcome / Login Screen -->
+    <section id="screen-welcome" class="hero-card">
+      <div style="display:flex; justify-content:center; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+        <span class="hero-badge" style="margin-bottom:0;">✨ KẾ HOẠCH BÀI DẠY TOÁN 6 - TUẦN 05 (TIẾT 19, 20) ✨</span>
+        <button class="tts-btn" onclick="VoiceNarrator.speak('Chào mừng em đến với Bài 9: Dấu hiệu chia hết cho 2, cho 5, cho 9 và cho 3! Hãy chọn nhân vật đồng hành Pi, Vuông hoặc Tròn để khám phá Bí Mật Của Bạn Tròn Với Số 71 001, Mê Cung Đường Đi Đến Siêu Thị và Xưởng Ghép Thẻ Chữ Số nhé!')">
+          🔊 Đọc lời dẫn mở đầu
+        </button>
+      </div>
+      <h2>THÁM TỬ DẤU HIỆU CHIA HẾT 2 • 5 • 9 • 3</h2>
+      <p>
+        Chào mừng em đến với thế giới trò chơi của <strong>Bài 9: Dấu hiệu chia hết (SGK Toán 6 trang 34 – 37)</strong>!
+        Mỗi hoạt động trong kế hoạch bài dạy là một trò chơi tương tác có <strong>giai điệu nhạc nền riêng</strong> và <strong>giọng đọc câu dẫn Tiếng Việt</strong>.
+      </p>
+
+      <div class="login-form">
+        <input
+          type="text"
+          id="player-name-input"
+          class="input-field"
+          placeholder="Nhập họ và tên của em (VD: Trần Bảo Ngọc)..."
+          maxlength="40"
+        />
+        <input
+          type="text"
+          id="player-class-input"
+          class="input-field"
+          placeholder="Lớp (VD: 6A1)"
+          maxlength="12"
+        />
+      </div>
+
+      <!-- Khung chọn nhân vật đồng hành Pi, Vuông, Tròn -->
+      <div id="welcome-companion-slot"></div>
+
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="font-size:1.05rem; padding:0.8rem 1.75rem;" onclick="App9.startGame()">
+          🔍 Chơi Bài 9: Dấu hiệu chia hết
+        </button>
+        <a href="bai8.html" class="btn btn-outline" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
+          ⚖️ Về Bài 8: Quan hệ chia hết
+        </a>
+        <a href="bai10.html" class="btn btn-purple" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
+          🌸 Sang Bài 10: Số nguyên tố
+        </a>
+        <a href="sotay.html" class="btn btn-outline" style="text-decoration:none;">
+          📖 Sổ tay hỏi đáp Toán 6
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. World Map Screen -->
+    <section id="screen-map" style="display:none;">
+      <div class="map-header">
+        <div>
+          <h2 style="font-size:1.35rem; margin-bottom:0.2rem;">🗺️ Bản Đồ Bài 9: Dấu Hiệu Chia Hết Cho 2, 5, 9, 3 (5 Trò Chơi)</h2>
+          <p style="font-size:0.88rem; color:var(--text-muted);">
+            Thiết kế bám sát từng Hoạt động trong KHBD Tuần 05 (Tiết 19–20, SGK Toán 6 trang 34 – 37). Có đọc câu dẫn Tiếng Việt và nhạc nền riêng!
+          </p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="App9.toggleModal('handbook-modal')">📖 Tóm tắt Bài 9</button>
+          <a href="bai8.html" class="btn btn-outline btn-sm" style="text-decoration:none;">⚖️ Về Bài 8</a>
+          <a href="bai10.html" class="btn btn-purple btn-sm" style="text-decoration:none;">🌸 Sang Bài 10 (Số nguyên tố)</a>
+          <button class="btn btn-outline btn-sm" onclick="App9.changePlayer()">✏️ Đổi tên &amp; Nhân vật</button>
+          <button class="btn btn-outline btn-sm" onclick="App9.resetProgress()">🔄 Chơi lại từ đầu</button>
+        </div>
+      </div>
+
+      <div class="quest-grid" id="quest-grid"></div>
+
+      <!-- Certificate Container -->
+      <div id="certificate-section"></div>
+    </section>
+
+    <!-- 3. Active Stage Screen -->
+    <section id="screen-stage" class="stage-screen" style="display:none;">
+      <div class="stage-topbar">
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="App9.showMap()">⬅ Bản đồ Bài 9</button>
+          <h3 id="stage-header-title" style="font-size:1.05rem;">Trò chơi 1</h3>
+          <span id="stage-music-badge" style="font-size:0.75rem; background:rgba(245,158,11,0.22); color:#fde68a; padding:0.2rem 0.6rem; border-radius:999px; border:1px solid rgba(245,158,11,0.4);">
+            🎶 Nhạc nền: Thám Tử Con Số
+          </span>
+        </div>
+        <div class="stage-sub-pills" id="stage-sub-pills"></div>
+      </div>
+
+      <div class="stage-body" id="stage-body"></div>
+    </section>
+  </main>
+
+  <!-- Modal 1: Virtual Scanner for Divisibility by 2, 3, 5, 9 -->
+  <div class="modal-backdrop" id="casio-modal" onclick="if(event.target===this) App9.toggleModal('casio-modal')">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+        <h3 style="color:#fbbf24;">🧮 Máy Quét Dấu Hiệu Chia Hết Cho 2, 5, 3, 9</h3>
+        <button class="btn btn-outline btn-sm" onclick="App9.toggleModal('casio-modal')">✖ Đóng</button>
+      </div>
+
+      <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.9rem;">
+        Nhập một số tự nhiên bất kỳ rồi bấm <strong>QUÉT DẤU HIỆU</strong> để xem chữ số tận cùng, tổng các chữ số và kết luận chia hết cho 2, 5, 3, 9!
+      </p>
+
+      <div class="casio-body">
+        <div class="casio-header">
+          <span>CASIO SIGN-SCANNER</span>
+          <span>DIVISIBILITY 2 • 5 • 3 • 9</span>
+        </div>
+        <div class="casio-lcd">
+          <div class="lcd-expr" id="casio-expr">71001 ➔ Tổng CS = 9</div>
+          <div class="lcd-res" id="casio-res" style="font-size:1.05rem;">⋮ 3, ⋮ 9 (∤ 2, ∤ 5)</div>
+        </div>
+        <div class="casio-keys">
+          <button class="c-key gcd-btn" style="grid-column: span 2;" onclick="CasioSign.evaluate()">QUÉT DẤU HIỆU</button>
+          <button class="c-key" onclick="CasioSign.quickExample(71001)">VD 71001</button>
+          <button class="c-key ac-btn" onclick="CasioSign.clear()">AC</button>
+
+          <button class="c-key" onclick="CasioSign.insert('7')">7</button>
+          <button class="c-key" onclick="CasioSign.insert('8')">8</button>
+          <button class="c-key" onclick="CasioSign.insert('9')">9</button>
+          <button class="c-key" onclick="CasioSign.backspace()">⌫</button>
+
+          <button class="c-key" onclick="CasioSign.insert('4')">4</button>
+          <button class="c-key" onclick="CasioSign.insert('5')">5</button>
+          <button class="c-key" onclick="CasioSign.insert('6')">6</button>
+          <button class="c-key gcd-btn" onclick="CasioSign.quickExample(2025)">VD 2025</button>
+
+          <button class="c-key" onclick="CasioSign.insert('1')">1</button>
+          <button class="c-key" onclick="CasioSign.insert('2')">2</button>
+          <button class="c-key" onclick="CasioSign.insert('3')">3</button>
+          <button class="c-key gcd-btn" onclick="CasioSign.quickExample(3456)">VD 3456</button>
+
+          <button class="c-key" onclick="CasioSign.insert('0')" style="grid-column: span 2;">0</button>
+          <button class="c-key eq-btn" onclick="CasioSign.evaluate()" style="grid-column: span 2;">= KẾT QUẢ QUÉT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Knowledge Handbook Bài 9 -->
+  <div class="modal-backdrop" id="handbook-modal" onclick="if(event.target===this) App9.toggleModal('handbook-modal')">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+        <h3 style="color:#fbbf24;">📖 Sổ Tay Kiến Thức Bài 9: Dấu Hiệu Chia Hết</h3>
+        <button class="btn btn-outline btn-sm" onclick="App9.toggleModal('handbook-modal')">✖ Đóng</button>
+      </div>
+
+      <div style="font-size:0.92rem; display:flex; flex-direction:column; gap:0.85rem;">
+        <div class="step-card">
+          <h4>1. Dấu hiệu chia hết cho 2, cho 5 (Xét chữ số tận cùng - SGK tr. 34–35)</h4>
+          <p>• Các số có <strong>chữ số tận cùng là 0, 2, 4, 6, 8</strong> thì <strong>chia hết cho 2</strong> và chỉ những số đó mới chia hết cho 2.</p>
+          <p>• Các số có <strong>chữ số tận cùng là 0 hoặc 5</strong> thì <strong>chia hết cho 5</strong> và chỉ những số đó mới chia hết cho 5.</p>
+          <p>• <strong>Đặc biệt:</strong> Các số có <strong>chữ số tận cùng là 0</strong> thì chia hết cho <strong>cả 2 và 5</strong>.</p>
+        </div>
+
+        <div class="step-card">
+          <h4>2. Dấu hiệu chia hết cho 9, cho 3 (Xét tổng các chữ số - SGK tr. 35–36)</h4>
+          <p>• Các số có <strong>tổng các chữ số chia hết cho 9</strong> thì <strong>chia hết cho 9</strong> và chỉ những số đó mới chia hết cho 9.</p>
+          <p>• Các số có <strong>tổng các chữ số chia hết cho 3</strong> thì <strong>chia hết cho 3</strong> và chỉ những số đó mới chia hết cho 3.</p>
+          <p style="margin-top:0.35rem; color:#fbbf24;">💡 <em>Em có biết (SGK tr. 37):</em> Vì mọi số có 3 chữ số <code>abc = 100a + 10b + c = 99a + 9b + (a + b + c)</code>, mà <code>99a + 9b</code> luôn chia hết cho 9 và cho 3, nên tính chia hết cho 9 (hoặc 3) phụ thuộc hoàn toàn vào tổng <code>(a + b + c)</code>!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="characters.js"></script>
+  <script src="game_bai9.js"></script>
+</body>
+</html>

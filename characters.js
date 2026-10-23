@@ -544,8 +544,70 @@ const Mascots = {
     }
   },
 
-  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho Bài 10, Bài 11 và Bài 12 */
+  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho Bài 8, Bài 9, Bài 10, Bài 11 và Bài 12 */
   dialogues: {
+    bai8_1: {
+      tron: 'Lớp 6A được thưởng 50 cái bút rời và thêm 4 hộp bút nữa, mà tụi mình chưa biết mỗi hộp có bao nhiêu cái bút thì làm sao biết có chia đều cho 4 tổ được không nhỉ?',
+      vuong: 'Cậu nhìn nhé: 4 hộp bút có số bút mỗi hộp bằng nhau nên tổng số bút trong 4 hộp chắc chắn chia hết cho 4 tổ rồi! Chỉ cần xét xem 50 cái bút rời có chia hết cho 4 không thôi!',
+      pi: 'Suy luận quá sắc bén! Vì 50 chia 4 được 12 dư 2 (50 không chia hết cho 4), nên dù mỗi hộp có bao nhiêu bút thì tổng số bút của lớp 6A cũng KHÔNG thể chia đều cho 4 tổ!',
+      hint: 'Mẹo của Anh Pi: Hãy thử chọn số bút trong mỗi hộp bất kỳ trên bàn thí nghiệm (ví dụ 6, 10 hoặc 12 bút) rồi bấm Kiểm tra chia cho 4 tổ, em sẽ thấy luôn dư 2 cái bút!'
+    },
+    bai8_2: {
+      vuong: 'Anh Pi ơi, làm thế nào để tìm đầy đủ tập hợp các ước của một số tự nhiên a lớn hơn 1 mà không bị sót ạ?',
+      pi: 'Ta lần lượt chia a cho các số tự nhiên từ 1 đến a, phép chia nào hết thì số chia đó là ước của a! Còn muốn tìm bội của b, ta nhân b lần lượt với 0, 1, 2, 3...',
+      tron: 'Còn ở Thử thách nhỏ trang 31: Tìm ba ước khác nhau của 12 có tổng bằng 12, mình nhẩm ra 2 + 4 + 6 = 12 ngay!',
+      hint: 'Mẹo của Bạn Tròn: Ư(20) = {1; 2; 4; 5; 10; 20}. Các bội nhỏ hơn 50 của 4 là: 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48. Ba ước của 12 có tổng bằng 12 là 2, 4, 6!'
+    },
+    bai8_3: {
+      tron: 'Mình vừa xem một video trên mạng bảo rằng: Nếu hai số đều không chia hết cho 4 thì tổng của chúng cũng không chia hết cho 4. Điều đó có đúng không Vuông?',
+      vuong: 'Sai rồi Tròn ơi! Ví dụ 3 không chia hết cho 4 và 5 cũng không chia hết cho 4, nhưng 3 + 5 = 8 lại chia hết cho 4 đấy! Mình phải kiểm chứng kỹ thông tin trên mạng nhé!',
+      pi: 'Đúng vậy! Tính chất 2 chỉ khẳng định khi trong hai số có MỘT số chia hết cho m và MỘT số KHÔNG chia hết cho m thì tổng của chúng mới không chia hết cho m!',
+      hint: 'Mẹo của Bạn Vuông: (21 + x) ⋮ 7 vì 21 ⋮ 7 nên cần x ⋮ 7 ⇒ chọn x ∈ {14; 28}. Còn để (20 + 45 + x) ∤ 5 thì cần x ∤ 5 ⇒ chọn x ∈ {39; 54}!'
+    },
+    bai8_4: {
+      vuong: 'Ở Bài 2.1 trang 33, mình nhận thấy số 17 chỉ có đúng hai ước là 1 và 17 thôi!',
+      tron: 'Còn ở Bài 2.3a, tìm các bội của 7 nhỏ hơn 70, mình nhớ phải bắt đầu nhân từ số 0 nhé: 0, 7, 14, 21, 28, 35, 42, 49, 56, 63!',
+      pi: 'Rất cẩn thận! Các em hãy luôn nhớ số 0 là bội của mọi số tự nhiên khác 0, và số 1 là ước của mọi số tự nhiên!',
+      hint: 'Mẹo của Anh Pi: Ư(30) = {1; 2; 3; 5; 6; 10; 15; 30}; Ư(35) = {1; 5; 7; 35}. Các ước của 50 lớn hơn 5 là: {10; 25; 50}!'
+    },
+    bai8_5: {
+      tron: 'Ở Bài 2.8 trang 33, đội thể thao có 45 vận động viên, huấn luyện viên muốn chia thành các nhóm đều nhau từ 3 đến 10 người mỗi nhóm!',
+      vuong: 'Vì 45 phải chia hết cho số người trong mỗi nhóm, nên số người mỗi nhóm phải là ước của 45 và nằm từ 3 đến 10!',
+      pi: 'Mà Ư(45) = {1; 3; 5; 9; 15; 45}, vậy huấn luyện viên có thể chia mỗi nhóm có 3, 5 hoặc 9 vận động viên!',
+      hint: 'Mẹo của Bạn Vuông: Bài 2.7: 40 HS chia đều được thành 4 nhóm, 5 nhóm, 8 nhóm, 10 nhóm (không chia được 6 nhóm vì 40 ∤ 6). Bài 2.9a: x = 24; Bài 2.9b: x ∈ {22; 45}!'
+    },
+
+    bai9_1: {
+      vuong: 'Lạ thật! Phép chia 71 001 cho 9 là một số có tới 5 chữ số, sao bạn Tròn vừa nhìn đề đã biết ngay phép chia hết không dư nhỉ?',
+      tron: 'Hihi, bí mật của mình là cộng tất cả các chữ số lại: 7 + 1 + 0 + 0 + 1 = 9! Vì 9 chia hết cho 9 nên 71 001 chia hết cho 9 luôn!',
+      pi: 'Đó chính là sức mạnh của Dấu hiệu chia hết trong Bài 9! Nhờ các dấu hiệu này, ta không cần đặt tính chia mà vẫn biết ngay một số có chia hết cho 2, 5, 9, 3 hay không!',
+      hint: 'Mẹo của Bạn Tròn: Tổng các chữ số của 71 001 là 7 + 1 + 0 + 0 + 1 = 9 ⋮ 9 nên số dư của phép chia 71 001 cho 9 bằng 0!'
+    },
+    bai9_2: {
+      tron: 'Muốn biết một số có chia hết cho 2 hoặc cho 5 hay không, mình chỉ cần nhìn vào chữ số tận cùng thôi đúng không anh Pi?',
+      pi: 'Chính xác! Tận cùng là 0, 2, 4, 6, 8 thì chia hết cho 2. Tận cùng là 0 hoặc 5 thì chia hết cho 5. Và đặc biệt: Tận cùng là 0 thì chia hết cho CẢ 2 VÀ 5!',
+      vuong: 'Áp dụng vào Luyện tập 1: 1 954 tận cùng là 4 (chia hết cho 2), còn 1 975 tận cùng là 5 (không chia hết cho 2), nên tổng (1 954 + 1 975) không chia hết cho 2!',
+      hint: 'Mẹo của Anh Pi: LT1: 1a) (1954 + 1975) ∤ 2; 1b) (2020 - 938) ⋮ 2; 2a) (1945 + 2020) ⋮ 5; 2b) (1954 - 1930) ∤ 5!'
+    },
+    bai9_3: {
+      vuong: 'Ở bài Vận dụng trang 36, mảnh đất dài 108 m, bác nông dân muốn trồng dừa hai đầu đất và cách đều nhau 9 m. Sao nhiều bạn tính ra 12 cây lại bị thiếu nhỉ?',
+      pi: 'Vì trồng ở CẢ HAI ĐẦU đoạn đường nên số cây dừa phải bằng số khoảng cách cộng thêm 1: 108 : 9 + 1 = 12 + 1 = 13 cây dừa!',
+      tron: 'Còn ở Mê cung đường đi đến Siêu thị trang 36, tụi mình đi qua các ô chia hết cho 3 hoặc chia hết cho 2 theo lộ trình: 21 → 15 → 2020 → 72 → 123 → 136 → 1245!',
+      hint: 'Mẹo của Bạn Vuông: LT2: Để 12* ⋮ 9 thì (1+2+*) = (3+*) ⋮ 9 ⇒ * = 6. LT3: Để 12*5 ⋮ 3 thì (8+*) ⋮ 3 ⇒ * ∈ {1; 4; 7}!'
+    },
+    bai9_4: {
+      tron: 'Ở Bài 2.14 trang 37, số 345* có dấu sao ở hàng đơn vị. Mình vừa phải xét chữ số tận cùng (cho 2 và 5), vừa phải xét tổng các chữ số (cho 3 và 9)!',
+      vuong: 'Tổng các chữ số hiện tại là 3 + 4 + 5 + * = 12 + *. Vì 12 đã chia hết cho 3 nên để chia hết cho 3 thì * ∈ {0; 3; 6; 9}; còn để chia hết cho 9 thì * = 6!',
+      pi: 'Lưu ý: Những số chia hết cho 9 thì chắc chắn chia hết cho 3, nhưng số chia hết cho 3 thì chưa chắc đã chia hết cho 9 (ví dụ số 123 chia hết cho 3 nhưng không chia hết cho 9)!',
+      hint: 'Mẹo của Anh Pi: Bài 2.12: 290 có 2+9+0 = 11 ∤ 9 nên không chia đều được 9 nhóm. Bài 2.13: 162 có 1+6+2 = 9 ⋮ 9 nên chia đều đủ 9 học sinh mỗi đội!'
+    },
+    bai9_5: {
+      vuong: 'Ở Bài 2.16 trang 37, dùng ba trong bốn thẻ chữ số 2, 0, 4, 5 để ghép thành các số có 3 chữ số khác nhau chia hết cho cả 2 và 3!',
+      tron: 'Muốn chia hết cho 3 thì tổng 3 chữ số phải chia hết cho 3! Trong 4 thẻ {2, 0, 4, 5}, chỉ có bộ {2, 0, 4} (tổng bằng 6) và bộ {0, 4, 5} (tổng bằng 9) là chia hết cho 3 thôi!',
+      pi: 'Sau đó chọn chữ số tận cùng là số chẵn (0, 2, 4) và chữ số hàng trăm khác 0, ta ghép được 8 số: 204, 240, 402, 420, 405, 450, 504 và 540!',
+      hint: 'Mẹo của Bạn Tròn: Bài 2.15 (thẻ 3, 0, 4): a) Chia hết cho 2 là 304, 340, 430; b) Chia hết cho 5 là 340, 430. Mục Em có biết: abc = 99a + 9b + (a + b + c)!'
+    },
+
     bai10_1: {
       tron: 'Mai có 11 bông hoa hồng mà muốn cắm đều vào các lọ nhỏ, mỗi lọ nhiều hơn 1 bông, sao cắm mãi vẫn bị lẻ vậy Vuông?',
       vuong: 'Vì số 11 chỉ có đúng hai ước là 1 và 11 thôi! Nhưng khi bớt 1 bông còn 10 bông, 10 có tới 4 ước là 1, 2, 5, 10 nên cắm đều vào 2 lọ hoặc 5 lọ vừa khít!',
