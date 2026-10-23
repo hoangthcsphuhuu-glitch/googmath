@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GOOGMATH • Trò Chơi Toán 6 (Bài 11: Ước chung & ƯCLN | Bài 12: Bội chung & BCNN)</title>
+  <meta name="referrer" content="no-referrer" />
+  <title>GOOGMATH • Trò Chơi Toán 6 (Bài 10, Bài 11, Bài 12 & Sổ Tay Toán 6)</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <!-- Lesson Switcher Bar -->
   <nav class="lesson-switcher">
     <span style="font-size:0.82rem; color:#fde68a; font-weight:800;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
+    <a href="bai10.html" class="lesson-tab">🌸 Bài 10: Số nguyên tố</a>
     <a href="index.html" class="lesson-tab active">👑 Bài 11: Ước chung & ƯCLN</a>
     <a href="bai12.html" class="lesson-tab">🚀 Bài 12: Bội chung & BCNN</a>
     <a href="sotay.html" class="lesson-tab">📖 Sổ Tay Hỏi Đáp Toán 6</a>
@@ -99,7 +101,10 @@
         <button class="btn btn-primary" style="font-size:1.05rem; padding:0.8rem 1.75rem;" onclick="App.startGame()">
           👑 Chơi Bài 11: Ước chung & ƯCLN
         </button>
-        <a href="bai12.html" class="btn btn-purple" style="font-size:1.05rem; padding:0.8rem 1.5rem; text-decoration:none;">
+        <a href="bai10.html" class="btn btn-accent" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
+          🌸 Bài 10: Số nguyên tố
+        </a>
+        <a href="bai12.html" class="btn btn-purple" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
           🚀 Sang Bài 12: Bội chung & BCNN
         </a>
         <a href="sotay.html" class="btn btn-outline" style="text-decoration:none;">
@@ -117,10 +122,11 @@
         <div>
           <h2 style="font-size:1.35rem; margin-bottom:0.2rem;">🗺️ Bản Đồ Bài 11: Ước Chung & ƯCLN (5 Trò Chơi)</h2>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            Mỗi ải tương ứng với một hoạt động trong Kế hoạch bài dạy Bài 11 (SGK Toán 6 trang 44 – 48). Em có thể chuyển sang <strong>Bài 12</strong> bất cứ lúc nào!
+            Mỗi ải tương ứng với một hoạt động trong Kế hoạch bài dạy Bài 11 (SGK Toán 6 trang 44 – 48). Em có thể chuyển sang <strong>Bài 10</strong> hoặc <strong>Bài 12</strong> bất cứ lúc nào!
           </p>
         </div>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <a href="bai10.html" class="btn btn-accent btn-sm" style="text-decoration:none;">🌸 Về Bài 10 (Số nguyên tố)</a>
           <a href="bai12.html" class="btn btn-purple btn-sm" style="text-decoration:none;">🚀 Chuyển sang Bài 12 (BC & BCNN)</a>
           <button class="btn btn-outline btn-sm" onclick="App.changePlayer()">✏️ Đổi tên & Nhân vật</button>
           <button class="btn btn-outline btn-sm" onclick="App.resetProgress()">🔄 Chơi lại từ đầu</button>

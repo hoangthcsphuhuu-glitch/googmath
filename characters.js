@@ -1,7 +1,20 @@
 /* ==========================================================================
    HỆ THỐNG ĐỌC CÂU DẪN TIẾNG VIỆT (VOICE NARRATOR) & NHÂN VẬT ĐỒNG HÀNH
    SGK TOÁN 6: PI (π) • VUÔNG (🟦) • TRÒN (🟠)
+   Hỗ trợ: Bài 10 (Số nguyên tố), Bài 11 (ƯC & ƯCLN), Bài 12 (BC & BCNN)
    ========================================================================== */
+
+// Đảm bảo trình duyệt không gửi Referer khi tải luồng âm thanh Google TTS Tiếng Việt (tránh lỗi 404)
+(function ensureNoReferrerMeta() {
+  try {
+    if (typeof document !== 'undefined' && document.head && !document.querySelector('meta[name="referrer"]')) {
+      const meta = document.createElement('meta');
+      meta.name = 'referrer';
+      meta.content = 'no-referrer';
+      document.head.appendChild(meta);
+    }
+  } catch (e) {}
+})();
 
 const VoiceNarrator = {
   enabled: localStorage.getItem('googmath_voice_enabled') !== 'false',
@@ -32,7 +45,7 @@ const VoiceNarrator = {
     localStorage.setItem('googmath_voice_enabled', String(this.enabled));
     this.updateUI();
     if (this.enabled) {
-      this.speak('Đã bật chế độ đọc câu dẫn và lời thoại trò chơi!');
+      this.speak('Đã bật chế độ đọc câu dẫn Tiếng Việt cho trò chơi!');
     }
   },
 
@@ -45,7 +58,7 @@ const VoiceNarrator = {
     pill.classList.toggle('speaking', this.isSpeaking);
 
     if (this.isSpeaking) {
-      lbl.textContent = '🔊 Đang đọc... (Bấm dừng)';
+      lbl.textContent = '🔊 Đang đọc Tiếng Việt... (Bấm dừng)';
     } else {
       lbl.textContent = this.enabled ? '🗣️ Đọc câu dẫn: Bật' : '🔇 Đọc câu dẫn: Tắt';
     }
@@ -56,6 +69,7 @@ const VoiceNarrator = {
     if (this.currentAudio) {
       try {
         this.currentAudio.pause();
+        this.currentAudio.src = '';
         this.currentAudio = null;
       } catch (e) {}
     }
@@ -68,16 +82,16 @@ const VoiceNarrator = {
     this.updateUI();
   },
 
-  /* Chuyển đổi ký hiệu Toán học Lớp 6 sang lời đọc Tiếng Việt tự nhiên */
+  /* Chuyển đổi ký hiệu Toán học Lớp 6 sang lời đọc Tiếng Việt chuẩn tự nhiên */
   normalizeMathForSpeech(rawText) {
     if (!rawText) return '';
     let s = String(rawText)
       .replace(/<[^>]+>/g, ' ')
-      .replace(/[🪚💎🧪⚡🏛️🛒🐸⚙️☄️🔮🌟🎉🌊🎭🛡️🔑🏆✅❌⚠️⚖️🍽️🥤👑🚀📖💚💬🔊💡🔥🟦🟠🧙‍♂️]/g, ' ')
+      .replace(/[🪚💎🧪⚡🏛️🛒🐸⚙️☄️🔮🌟🎉🌊🎭🛡️🔑🏆✅❌⚠️⚖️🍽️🥤👑🚀📖💚💬🔊💡🔥🟦🟠🧙‍♂️🌸🎬🌳👯]/g, ' ')
       .replace(/&nbsp;/g, ' ')
       .replace(/&amp;/g, ' và ');
 
-    // Thay thế các ký hiệu tập hợp và ƯCLN / BCNN
+    // Thay thế các ký hiệu tập hợp, Số nguyên tố và ƯCLN / BCNN
     s = s
       .replace(/ƯCLN\s*\(\s*([^)]+)\s*\)/gi, (_, args) => `Ước chung lớn nhất của ${args.replace(/,/g, ' và ')}`)
       .replace(/BCNN\s*\(\s*([^)]+)\s*\)/gi, (_, args) => `Bội chung nhỏ nhất của ${args.replace(/,/g, ' và ')}`)
@@ -87,20 +101,28 @@ const VoiceNarrator = {
       .replace(/B\s*\(\s*(\d+)\s*\)/g, 'tập hợp các bội của $1')
       .replace(/GCD\s*\(\s*([^)]+)\s*\)/gi, (_, args) => `Ước chung lớn nhất của ${args.replace(/,/g, ' và ')}`)
       .replace(/LCM\s*\(\s*([^)]+)\s*\)/gi, (_, args) => `Bội chung nhỏ nhất của ${args.replace(/,/g, ' và ')}`)
+      .replace(/FACT\s*\(\s*([^)]+)\s*\)/gi, 'phân tích thừa số nguyên tố của $1')
       .replace(/\bƯCLN\b/g, 'Ước chung lớn nhất')
       .replace(/\bBCNN\b/g, 'Bội chung nhỏ nhất')
       .replace(/\bƯC\b/g, 'Ước chung')
-      .replace(/\bBC\b/g, 'Bội chung');
+      .replace(/\bBC\b/g, 'Bội chung')
+      .replace(/\bSNT\b/g, 'số nguyên tố')
+      .replace(/\bTSNT\b/g, 'thừa số nguyên tố');
 
     // Lũy thừa & phép toán
     s = s
-      .replace(/(\d+)\s*²/g, '$1 mũ 2')
-      .replace(/(\d+)\s*³/g, '$1 mũ 3')
-      .replace(/(\d+)\s*⁴/g, '$1 mũ 4')
+      .replace(/(\d+)\s*¹⁰/g, '$1 mũ 10')
+      .replace(/(\d+)\s*⁸/g, '$1 mũ 8')
+      .replace(/(\d+)\s*⁷/g, '$1 mũ 7')
+      .replace(/(\d+)\s*⁶/g, '$1 mũ 6')
       .replace(/(\d+)\s*⁵/g, '$1 mũ 5')
+      .replace(/(\d+)\s*⁴/g, '$1 mũ 4')
+      .replace(/(\d+)\s*³/g, '$1 mũ 3')
+      .replace(/(\d+)\s*²/g, '$1 mũ 2')
       .replace(/(\d+)\s*¹/g, '$1 mũ 1')
       .replace(/⋮/g, ' chia hết cho ')
       .replace(/∈/g, ' thuộc ')
+      .replace(/ℕ/g, ' tập hợp số tự nhiên ')
       .replace(/≠/g, ' khác ')
       .replace(/≥/g, ' lớn hơn hoặc bằng ')
       .replace(/≤/g, ' nhỏ hơn hoặc bằng ')
@@ -116,6 +138,7 @@ const VoiceNarrator = {
       .replace(/\bHĐ\s*(\d+)/g, 'Hoạt động $1')
       .replace(/\bHS\b/g, 'học sinh')
       .replace(/\bEuclid\b/gi, 'Ơ-clít')
+      .replace(/\bEratosthenes\b/gi, 'Ê-ra-tô-xten')
       .replace(/π/g, 'Pi')
       .replace(/\s+/g, ' ')
       .trim();
@@ -123,18 +146,19 @@ const VoiceNarrator = {
     return s;
   },
 
-  getVietnameseVoice() {
+  /* Chỉ chọn giọng đọc thực sự là Tiếng Việt (lang bắt đầu bằng 'vi'), tuyệt đối không lấy giọng Tiếng Anh */
+  getNativeVietnameseVoice() {
     if (!('speechSynthesis' in window)) return null;
     const voices = window.speechSynthesis.getVoices() || [];
     return (
       voices.find(v => v.lang && v.lang.toLowerCase().startsWith('vi') && /hoaimy|google|natural/i.test(v.name)) ||
       voices.find(v => v.lang && v.lang.toLowerCase().startsWith('vi')) ||
-      voices.find(v => /vietnam|tiếng việt|hoaimy|namminh/i.test(v.name)) ||
+      voices.find(v => /vietnamese|tiếng việt|hoaimy|namminh/i.test(v.name)) ||
       null
     );
   },
 
-  splitIntoChunks(text, maxLen = 175) {
+  splitIntoChunks(text, maxLen = 140) {
     const sentences = text.split(/(?<=[.!?…;:])\s+/);
     const chunks = [];
     let current = '';
@@ -172,24 +196,24 @@ const VoiceNarrator = {
 
     // Hiệu ứng chuông báo bắt đầu đọc dịu nhẹ
     if (typeof Sound !== 'undefined' && Sound.playTone) {
-      Sound.playTone(587.33, 0.07, 'sine', 0);
-      Sound.playTone(880.0, 0.09, 'sine', 0.06);
+      Sound.playTone(587.33, 0.06, 'sine', 0);
+      Sound.playTone(880.0, 0.08, 'sine', 0.05);
     }
 
-    const viVoice = this.getVietnameseVoice();
+    const viVoice = this.getNativeVietnameseVoice();
 
-    // 1. Ưu tiên giọng đọc Tiếng Việt bản địa của trình duyệt (Microsoft HoaiMy / Google Tiếng Việt)
+    // 1. Nếu thiết bị có sẵn giọng Tiếng Việt bản địa (Microsoft HoaiMy / NamMinh / Google Tiếng Việt)
     if (viVoice && 'speechSynthesis' in window) {
-      this.speakWithBrowserVoice(cleanText, viVoice, role);
+      this.speakWithNativeViVoice(cleanText, viVoice, role);
       return;
     }
 
-    // 2. Nếu thiết bị chưa cài gói giọng Tiếng Việt nội bộ, phát qua luồng âm thanh Tiếng Việt trực tuyến (và dự phòng Web Speech)
-    this.speakWithCloudOrFallback(cleanText, role);
+    // 2. Luôn phát giọng đọc Tiếng Việt chuẩn qua Google Vietnamese TTS (không dùng giọng Tiếng Anh)
+    this.speakWithVietnameseCloudTTS(cleanText, role);
   },
 
-  speakWithBrowserVoice(cleanText, viVoice, role) {
-    const chunks = this.splitIntoChunks(cleanText, 220);
+  speakWithNativeViVoice(cleanText, viVoice, role) {
+    const chunks = this.splitIntoChunks(cleanText, 200);
     if (chunks.length === 0) return;
 
     this.isSpeaking = true;
@@ -208,7 +232,7 @@ const VoiceNarrator = {
       utter.lang = 'vi-VN';
 
       if (role === 'tron') {
-        utter.pitch = 1.18;
+        utter.pitch = 1.16;
         utter.rate = 1.04;
       } else if (role === 'vuong') {
         utter.pitch = 1.02;
@@ -217,7 +241,7 @@ const VoiceNarrator = {
         utter.pitch = 0.94;
         utter.rate = 0.98;
       } else {
-        utter.pitch = 1.05;
+        utter.pitch = 1.04;
         utter.rate = 1.02;
       }
 
@@ -226,8 +250,8 @@ const VoiceNarrator = {
         speakNext();
       };
       utter.onerror = () => {
-        this.isSpeaking = false;
-        this.updateUI();
+        // Nếu voice nội bộ lỗi, chuyển ngay sang Cloud TTS Tiếng Việt
+        this.speakWithVietnameseCloudTTS(chunks.slice(idx).join(' '), role);
       };
 
       window.speechSynthesis.speak(utter);
@@ -236,8 +260,8 @@ const VoiceNarrator = {
     speakNext();
   },
 
-  speakWithCloudOrFallback(cleanText, role) {
-    const chunks = this.splitIntoChunks(cleanText, 165);
+  speakWithVietnameseCloudTTS(cleanText, role) {
+    const chunks = this.splitIntoChunks(cleanText, 135);
     if (chunks.length === 0) return;
 
     this.isSpeaking = true;
@@ -253,11 +277,9 @@ const VoiceNarrator = {
       }
 
       const seg = this.audioQueue.shift();
-      const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=vi&client=tw-ob&q=${encodeURIComponent(seg)}`;
-      const audio = new Audio();
-      audio.referrerPolicy = 'no-referrer';
-      audio.src = url;
-      audio.playbackRate = role === 'tron' ? 1.08 : role === 'pi' ? 0.98 : 1.03;
+      const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=${encodeURIComponent(seg)}`;
+      const audio = new Audio(url);
+      audio.playbackRate = role === 'tron' ? 1.08 : role === 'pi' ? 0.98 : 1.04;
       this.currentAudio = audio;
 
       audio.onended = () => {
@@ -265,31 +287,27 @@ const VoiceNarrator = {
       };
 
       audio.onerror = () => {
-        // Dự phòng về Web Speech API với mã ngôn ngữ vi-VN
-        if ('speechSynthesis' in window) {
-          const utter = new SpeechSynthesisUtterance(seg);
-          utter.lang = 'vi-VN';
-          utter.onend = () => playNextAudio();
-          utter.onerror = () => {
-            this.isSpeaking = false;
-            this.updateUI();
-          };
-          window.speechSynthesis.speak(utter);
+        // Thử tiếp đoạn tiếp theo hoặc kết thúc (tuyệt đối không gọi giọng Tiếng Anh)
+        if (this.audioQueue.length > 0) {
+          playNextAudio();
         } else {
           this.isSpeaking = false;
+          this.currentAudio = null;
           this.updateUI();
         }
       };
 
       audio.play().catch(() => {
-        audio.onerror();
+        this.isSpeaking = false;
+        this.currentAudio = null;
+        this.updateUI();
       });
     };
 
     playNextAudio();
   },
 
-  /* Đọc toàn bộ cuộc hội thoại của 3 nhân vật Vuông, Tròn, Pi */
+  /* Đọc toàn bộ cuộc hội thoại Tiếng Việt của 3 nhân vật Vuông, Tròn, Pi */
   readDialogue(lessonKey, stageId) {
     const key = `${lessonKey}_${stageId}`;
     const d = Mascots.dialogues[key];
@@ -298,7 +316,7 @@ const VoiceNarrator = {
     this.speak(fullText, 'narrator');
   },
 
-  /* Tự động gắn nút 🔊 Đọc câu dẫn & đọc lời dẫn khi vào ải/chặng mới */
+  /* Tự động gắn nút 🔊 Đọc câu dẫn Tiếng Việt & đọc lời dẫn khi vào ải/chặng mới */
   enhanceStageDOM(autoSpeakIfNew = true) {
     const stageBody = document.getElementById('stage-body');
     if (!stageBody) return;
@@ -322,7 +340,7 @@ const VoiceNarrator = {
         btn.type = 'button';
         btn.className = 'tts-btn';
         btn.innerHTML = '🔊 Đọc câu dẫn';
-        btn.title = 'Nghe đọc câu dẫn hoạt động này';
+        btn.title = 'Nghe đọc câu dẫn hoạt động này bằng Tiếng Việt';
         btn.onclick = (e) => {
           e.stopPropagation();
           this.speak(fullStoryText, 'narrator');
@@ -330,19 +348,15 @@ const VoiceNarrator = {
         headerRow.appendChild(btn);
       }
 
-      // Tự động đọc câu dẫn khi chuyển sang ải / chặng / câu hỏi mới
+      // Tự động đọc câu dẫn ngay khi chuyển sang ải / chặng / câu hỏi mới
       const sig = fullStoryText.trim().slice(0, 140);
       if (autoSpeakIfNew && this.enabled && sig && sig !== this.lastIntroSignature) {
         this.lastIntroSignature = sig;
-        setTimeout(() => {
-          if (this.enabled) {
-            this.speak(fullStoryText, 'narrator');
-          }
-        }, 280);
+        this.speak(fullStoryText, 'narrator');
       }
     });
 
-    // 2. Gắn nút "🔊 Đọc yêu cầu" cho từng .step-card h4
+    // 2. Gắn nút "🔊 Nghe yêu cầu" cho từng .step-card h4
     const stepHeaders = stageBody.querySelectorAll('.step-card h4');
     stepHeaders.forEach((h4) => {
       if (h4.dataset.voiceEnhanced === '1') return;
@@ -390,11 +404,7 @@ const VoiceNarrator = {
         const fbSig = rawFb.trim().slice(0, 120);
         if (this.enabled && fbSig && fbSig !== this.lastFeedbackSignature) {
           this.lastFeedbackSignature = fbSig;
-          setTimeout(() => {
-            if (this.enabled) {
-              this.speak(rawFb, 'feedback');
-            }
-          }, 320);
+          this.speak(rawFb, 'feedback');
         }
       }
     });
@@ -415,7 +425,7 @@ const VoiceNarrator = {
         btn.type = 'button';
         btn.className = 'tts-btn tts-sm';
         btn.innerHTML = '🔊 Nghe';
-        btn.title = 'Nghe giới thiệu màn chơi này';
+        btn.title = 'Nghe giới thiệu màn chơi này bằng Tiếng Việt';
         btn.onclick = (e) => {
           e.stopPropagation();
           this.speak(`${title}. ${desc}`, 'narrator');
@@ -534,8 +544,39 @@ const Mascots = {
     }
   },
 
-  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho từng ải của Bài 11 và Bài 12 */
+  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho Bài 10, Bài 11 và Bài 12 */
   dialogues: {
+    bai10_1: {
+      tron: 'Mai có 11 bông hoa hồng mà muốn cắm đều vào các lọ nhỏ, mỗi lọ nhiều hơn 1 bông, sao cắm mãi vẫn bị lẻ vậy Vuông?',
+      vuong: 'Vì số 11 chỉ có đúng hai ước là 1 và 11 thôi! Nhưng khi bớt 1 bông còn 10 bông, 10 có tới 4 ước là 1, 2, 5, 10 nên cắm đều vào 2 lọ hoặc 5 lọ vừa khít!',
+      pi: 'Chính xác! Số tự nhiên lớn hơn 1 chỉ có hai ước là 1 và chính nó như số 11 được gọi là Số nguyên tố. Còn số có nhiều hơn hai ước như số 10 gọi là Hợp số!',
+      hint: 'Mẹo của Anh Pi: Em hãy thử bấm chọn cắm vào 2 lọ hoặc 5 lọ trên bàn cắm hoa nhé. Với 11 bông sẽ luôn bị lẻ, còn 10 bông thì chia đều được!'
+    },
+    bai10_2: {
+      vuong: 'Anh Pi ơi, vậy hai số đặc biệt là số 0 và số 1 có phải là số nguyên tố hay hợp số không ạ?',
+      pi: 'Không đâu nhé! Số 0 và số 1 KHÔNG là số nguyên tố và cũng KHÔNG là hợp số. Và số 2 là số nguyên tố nhỏ nhất, đồng thời là số nguyên tố chẵn duy nhất!',
+      tron: 'Còn ở Mê cung đường đi đến Rạp chiếu phim, tụi mình chỉ được bước lên các ô mang số nguyên tố thôi!',
+      hint: 'Mẹo của Bạn Tròn: Các số nguyên tố từ 2 đến 11 là: 2, 3, 5, 7, 11. Đường đi đến rạp chiếu phim là: 7 → 19 → 13 → 11 → 23 → 29 → 31 → 41 → 17 → 2!'
+    },
+    bai10_3: {
+      tron: 'Bạn Việt viết 60 = 3 · 4 · 5 mà thầy bảo chưa phải là phân tích ra thừa số nguyên tố, vì sao thế Vuông?',
+      vuong: 'Vì số 4 vẫn là hợp số (4 = 2²)! Phải phân tích đến khi tất cả các thừa số đều là số nguyên tố: 60 = 2² · 3 · 5 mới đúng!',
+      pi: 'Và các em nhớ nhận xét rất đẹp này nhé: Dù em phân tích bằng Sơ đồ cây hay Sơ đồ cột dọc thì cuối cùng cũng cho ra CÙNG MỘT KẾT QUẢ duy nhất!',
+      hint: 'Mẹo của Bạn Vuông: 18 = 2 · 3²; 30 = 2 · 3 · 5; ở Luyện tập 3: 36 = 2² · 3² và 105 = 3 · 5 · 7!'
+    },
+    bai10_4: {
+      vuong: 'Ở Bài 2.24 trang 42, Đội tiêu binh danh dự ở Quảng trường Ba Đình có 33 chiến sĩ. Làm sao biết có mấy cách xếp hàng đều nhau?',
+      tron: 'Số hàng phải là ước của 33! Mà 33 = 3 · 11 nên các ước của 33 là 1, 3, 11 và 33!',
+      pi: 'Tuyệt vời! Như vậy có 4 cách xếp hàng đều nhau: 1 hàng 33 chiến sĩ, 3 hàng 11 chiến sĩ, 11 hàng 3 chiến sĩ hoặc 33 hàng 1 chiến sĩ!',
+      hint: 'Mẹo của Anh Pi: 70 = 2 · 5 · 7; 115 = 5 · 23; 120 = 2³ · 3 · 5; 102 = 2 · 3 · 17; A = 4⁴ · 9⁵ = (2²)⁴ · (3²)⁵ = 2⁸ · 3¹⁰!'
+    },
+    bai10_5: {
+      tron: 'Anh Pi ơi, ở Bài 2.29 trang 43 có nhắc đến "Cặp số nguyên tố sinh đôi", nghe thú vị quá!',
+      pi: 'Hai số nguyên tố được gọi là sinh đôi nếu chúng hơn kém nhau đúng 2 đơn vị, ví dụ như cặp (3; 5) hoặc (5; 7) đấy!',
+      vuong: 'Và khi tra cứu bảng số nguyên tố trên màn hình, tụi mình nhớ giữ khoảng cách mắt an toàn 50 cm và ngồi thẳng lưng để bảo vệ thị lực nhé!',
+      hint: 'Mẹo của Bạn Vuông: 5 cặp số nguyên tố sinh đôi nhỏ hơn 40 là: (3; 5), (5; 7), (11; 13), (17; 19) và (29; 31)!'
+    },
+
     bai11_1: {
       vuong: 'Bác thợ mộc có tấm gỗ 18 dm và 30 dm. Nếu mình chọn lưỡi cưa 4 dm thì tấm 18 dm sẽ bị thừa mất 2 dm gỗ!',
       tron: 'Vậy độ dài đoạn gỗ cắt ra phải vừa là ước của 18, vừa là ước của 30 đúng không Vuông?',
@@ -627,7 +668,7 @@ const Mascots = {
   renderPickerHTML() {
     return `
       <div class="companion-picker">
-        <div class="companion-picker-title">🌟 Chọn Nhân Vật Đồng Hành Cùng Em (Bấm để nghe giọng chào):</div>
+        <div class="companion-picker-title">🌟 Chọn Nhân Vật Đồng Hành Cùng Em (Bấm để nghe giọng chào Tiếng Việt):</div>
         <div class="companion-grid">
           ${Object.values(this.info).map(c => `
             <div class="companion-card ${this.selectedId === c.id ? 'selected' : ''}"
