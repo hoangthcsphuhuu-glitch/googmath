@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOOGMATH • Trò Chơi Toán 6 (Bài 11: Ước chung & ƯCLN | Bài 12: Bội chung & BCNN)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Lesson Switcher Bar -->
+  <nav class="lesson-switcher">
+    <span style="font-size:0.82rem; color:#fde68a; font-weight:800;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
+    <a href="index.html" class="lesson-tab active">👑 Bài 11: Ước chung & ƯCLN (5 Trò chơi)</a>
+    <a href="bai12.html" class="lesson-tab">🚀 Bài 12: Bội chung & BCNN (5 Trò chơi)</a>
+  </nav>
+
+  <!-- Top HUD Bar -->
+  <header class="hud-bar">
+    <div class="brand" onclick="App.showMap()" style="cursor:pointer" title="Về Bản Đồ Chặng">
+      <div class="brand-icon">👑</div>
+      <div class="brand-text">
+        <h1>GOOGMATH • BÀI 11: ƯỚC CHUNG & ƯCLN</h1>
+        <p>Toán 6 • GV: Lý Hoàng Em • Cổng Game Học Tập Tương Tác</p>
+      </div>
+    </div>
+
+    <div class="hud-stats">
+      <div class="stat-pill" id="hud-player">👤 Khách</div>
+      <div class="stat-pill score">🏆 <span id="hud-score">0</span> điểm</div>
+      <div class="stat-pill stars">⭐ <span id="hud-stars">0</span>/15 sao</div>
+      <div class="bgm-pill" id="bgm-pill" onclick="BGM.toggle()" title="Bật/Tắt nhạc nền của trò chơi">
+        <div class="eq-bars">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+        <span id="bgm-label">🎵 Nhạc nền: Bật</span>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <button class="btn btn-outline btn-sm" onclick="App.toggleModal('handbook-modal')">
+        📖 Sổ tay
+      </button>
+      <button class="btn btn-accent btn-sm" onclick="App.toggleModal('casio-modal')">
+        🧮 Máy tính GCD
+      </button>
+      <button class="btn btn-outline btn-sm" id="sound-toggle-btn" onclick="Sound.toggle()">
+        🔊 Âm thanh
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <!-- 1. Welcome / Login Screen -->
+    <section id="screen-welcome" class="hero-card">
+      <span class="hero-badge">✨ KẾ HOẠCH BÀI DẠY TOÁN 6 - TIẾT 25, 26, 27 ✨</span>
+      <h2>CHINH PHỤC VƯƠNG QUỐC ƯỚC CHUNG</h2>
+      <p>
+        Chào mừng em đến với trò chơi học tập <strong>Bài 11: Ước chung. Ước chung lớn nhất</strong>!
+        Hãy nhập họ tên và lớp của em để bắt đầu vượt qua 5 ải thử thách từ Xưởng Mộc Thông Thái đến Mật Mã Euclid Cổ Đại.
+      </p>
+
+      <div class="login-form">
+        <input
+          type="text"
+          id="player-name-input"
+          class="input-field"
+          placeholder="Nhập họ và tên của em (VD: Nguyễn Minh An)..."
+          maxlength="40"
+        />
+        <input
+          type="text"
+          id="player-class-input"
+          class="input-field"
+          placeholder="Lớp (VD: 6A1)"
+          maxlength="12"
+        />
+      </div>
+
+      <!-- Khung chọn nhân vật đồng hành Pi, Vuông, Tròn -->
+      <div id="welcome-companion-slot"></div>
+
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="font-size:1.05rem; padding:0.8rem 1.75rem;" onclick="App.startGame()">
+          👑 Chơi Bài 11: Ước chung & ƯCLN
+        </button>
+        <a href="bai12.html" class="btn btn-purple" style="font-size:1.05rem; padding:0.8rem 1.5rem; text-decoration:none;">
+          🚀 Sang Bài 12: Bội chung & BCNN
+        </a>
+        <button class="btn btn-outline" onclick="App.toggleModal('handbook-modal')">
+          📘 Sổ tay Bài 11
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. World Map Screen -->
+    <section id="screen-map" style="display:none;">
+      <div class="map-header">
+        <div>
+          <h2 style="font-size:1.35rem; margin-bottom:0.2rem;">🗺️ Bản Đồ Bài 11: Ước Chung & ƯCLN (5 Trò Chơi)</h2>
+          <p style="font-size:0.88rem; color:var(--text-muted);">
+            Mỗi ải tương ứng với một hoạt động trong Kế hoạch bài dạy Bài 11 (SGK Toán 6 trang 44 – 48). Em có thể chuyển sang <strong>Bài 12</strong> bất cứ lúc nào!
+          </p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <a href="bai12.html" class="btn btn-purple btn-sm" style="text-decoration:none;">🚀 Chuyển sang Bài 12 (BC & BCNN)</a>
+          <button class="btn btn-outline btn-sm" onclick="App.changePlayer()">✏️ Đổi tên & Nhân vật</button>
+          <button class="btn btn-outline btn-sm" onclick="App.resetProgress()">🔄 Chơi lại từ đầu</button>
+        </div>
+      </div>
+
+      <div class="quest-grid" id="quest-grid"></div>
+
+      <!-- Certificate Container when all or some stages completed -->
+      <div id="certificate-section"></div>
+    </section>
+
+    <!-- 3. Active Stage Screen -->
+    <section id="screen-stage" class="stage-screen" style="display:none;">
+      <div class="stage-topbar">
+        <div style="display:flex; align-items:center; gap:0.65rem;">
+          <button class="btn btn-outline btn-sm" onclick="App.showMap()">⬅ Bản đồ</button>
+          <h2 id="stage-header-title" style="font-size:1.15rem;">Ải 1</h2>
+        </div>
+        <div class="stage-progress-pills" id="stage-sub-pills"></div>
+      </div>
+
+      <div id="stage-body"></div>
+    </section>
+  </main>
+
+  <!-- Modal 1: Virtual Casio GCD Calculator (Năng lực số 5.2TC1b) -->
+  <div class="modal-backdrop" id="casio-modal" onclick="if(event.target===this) App.toggleModal('casio-modal')">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+        <h3 style="color:#fbbf24;">🧮 Máy Tính Cầm Tay Ảo (Tìm nhanh ƯCLN - GCD)</h3>
+        <button class="btn btn-outline btn-sm" onclick="App.toggleModal('casio-modal')">✖ Đóng</button>
+      </div>
+      <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:1rem;">
+        <strong>Hướng dẫn Năng lực số (5.2TC1b):</strong> Trên máy tính cầm tay Casio fx-580VN X, để tìm <code>ƯCLN(a, b)</code> ta bấm <kbd>ALPHA</kbd> + <kbd>×</kbd> để hiện <code>GCD(</code>, sau đó nhập <code>a , b ) =</code>. Hãy thực hành ngay bên dưới!
+      </p>
+
+      <div class="casio-body">
+        <div class="casio-header">
+          <span><strong>CASIO</strong> fx-580VN X</span>
+          <span>SIMULATOR • GCD</span>
+        </div>
+        <div class="casio-lcd">
+          <div class="lcd-expr" id="casio-expr">GCD(36,84)</div>
+          <div class="lcd-res" id="casio-res">12</div>
+        </div>
+        <div class="casio-keys">
+          <button class="c-key gcd-btn" onclick="Casio.insert('GCD(')" title="ALPHA + × (GCD)">GCD(</button>
+          <button class="c-key gcd-btn" onclick="Casio.insert(',')" title="Dấu phẩy ngăn cách">,</button>
+          <button class="c-key" onclick="Casio.insert(')')">)</button>
+          <button class="c-key ac-btn" onclick="Casio.clear()">AC</button>
+
+          <button class="c-key" onclick="Casio.insert('7')">7</button>
+          <button class="c-key" onclick="Casio.insert('8')">8</button>
+          <button class="c-key" onclick="Casio.insert('9')">9</button>
+          <button class="c-key" onclick="Casio.backspace()">⌫</button>
+
+          <button class="c-key" onclick="Casio.insert('4')">4</button>
+          <button class="c-key" onclick="Casio.insert('5')">5</button>
+          <button class="c-key" onclick="Casio.insert('6')">6</button>
+          <button class="c-key gcd-btn" onclick="Casio.quickExample(24,28)">VD 24,28</button>
+
+          <button class="c-key" onclick="Casio.insert('1')">1</button>
+          <button class="c-key" onclick="Casio.insert('2')">2</button>
+          <button class="c-key" onclick="Casio.insert('3')">3</button>
+          <button class="c-key gcd-btn" onclick="Casio.quickExample(72,96)">VD 72,96</button>
+
+          <button class="c-key" onclick="Casio.insert('0')" style="grid-column: span 2;">0</button>
+          <button class="c-key eq-btn" onclick="Casio.evaluate()" style="grid-column: span 2;">= KẾT QUẢ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Knowledge Handbook (Sổ tay kiến thức Bài 11) -->
+  <div class="modal-backdrop" id="handbook-modal" onclick="if(event.target===this) App.toggleModal('handbook-modal')">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+        <h3 style="color:#60a5fa;">📖 Sổ Tay Kiến Thức Bài 11: Ước chung & ƯCLN</h3>
+        <button class="btn btn-outline btn-sm" onclick="App.toggleModal('handbook-modal')">✖ Đóng</button>
+      </div>
+
+      <div style="font-size:0.92rem; display:flex; flex-direction:column; gap:0.85rem;">
+        <div class="step-card">
+          <h4>1. Ước chung (ƯC) và Ước chung lớn nhất (ƯCLN)</h4>
+          <p>• <strong>Ước chung</strong> của hai hay nhiều số là ước của tất cả các số đó.</p>
+          <p>• <strong>Ước chung lớn nhất</strong> của hai hay nhiều số là số lớn nhất trong tập hợp các ước chung của các số đó.</p>
+          <p>• <strong>Trường hợp đặc biệt:</strong></p>
+          <p>&nbsp;&nbsp;+ Nếu <code>a ⋮ b</code> thì <code>ƯCLN(a, b) = b</code> (Ví dụ: <code>ƯCLN(90, 10) = 10</code>).</p>
+          <p>&nbsp;&nbsp;+ <code>ƯCLN(a, 1) = 1</code> và <code>ƯCLN(a, b, 1) = 1</code>.</p>
+        </div>
+
+        <div class="step-card">
+          <h4>2. Ba bước tìm ƯCLN bằng cách phân tích ra thừa số nguyên tố</h4>
+          <p>• <strong>Bước 1:</strong> Phân tích mỗi số ra thừa số nguyên tố.</p>
+          <p>• <strong>Bước 2:</strong> Chọn ra các thừa số nguyên tố <strong>chung</strong>.</p>
+          <p>• <strong>Bước 3:</strong> Lập tích các thừa số đã chọn, mỗi thừa số lấy với <strong>số mũ nhỏ nhất</strong> của nó. Tích đó là ƯCLN phải tìm.</p>
+          <p style="margin-top:0.35rem; color:#fbbf24;">💡 <em>Cách tìm ƯC từ ƯCLN:</em> Tìm ƯCLN rồi tìm các ước của ƯCLN đó!</p>
+        </div>
+
+        <div class="step-card">
+          <h4>3. Rút gọn về phân số tối giản & Hai số nguyên tố cùng nhau</h4>
+          <p>• Hai số có <code>ƯCLN(a, b) = 1</code> gọi là <strong>hai số nguyên tố cùng nhau</strong>.</p>
+          <p>• Phân số <code>a/b</code> là <strong>phân số tối giản</strong> nếu <code>ƯCLN(a, b) = 1</code>.</p>
+          <p>• Để đưa một phân số chưa tối giản về tối giản, ta <strong>chia cả tử và mẫu cho ƯCLN của chúng</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="characters.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

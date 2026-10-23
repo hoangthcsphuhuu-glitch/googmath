@@ -1,0 +1,1182 @@
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-light: #334155;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --success: #10b981;
+  --danger: #ef4444;
+  --purple: #8b5cf6;
+  --cyan: #06b6d4;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --border-color: rgba(255, 255, 255, 0.14);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Header / HUD */
+.hud-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.brand-text h1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.brand-text p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stat-pill.score {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+.stat-pill.stars {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: #fff;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+}
+
+.btn-accent:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.82rem;
+  border-radius: 9px;
+}
+
+/* Main Container */
+.main-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+/* Welcome / Login Screen */
+.hero-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.2rem 1.8rem;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 680px;
+  margin: 1.5rem auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-card h2 {
+  font-size: 1.9rem;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(90deg, #fff, #93c5fd, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-card p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+}
+
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto 1.25rem;
+}
+
+@media (max-width: 520px) {
+  .login-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-field {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1.5px solid var(--border-color);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+}
+
+/* World Map / Quest Nodes */
+.map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  background: rgba(30, 41, 59, 0.75);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.quest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.15rem;
+}
+
+.quest-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quest-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.quest-card.completed {
+  border-color: rgba(16, 185, 129, 0.6);
+}
+
+.quest-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.quest-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  flex-shrink: 0;
+}
+
+.quest-tag {
+  font-size: 0.73rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #93c5fd;
+}
+
+.quest-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.quest-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.quest-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.star-display {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+/* Stage Screen */
+.stage-screen {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.stage-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stage-progress-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.sub-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-muted);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.sub-pill.active {
+  background: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+  border-color: #3b82f6;
+}
+
+.sub-pill.done {
+  background: rgba(16, 185, 129, 0.22);
+  color: #6ee7b7;
+  border-color: #10b981;
+}
+
+/* Story / Instruction Box */
+.story-box {
+  background: rgba(15, 23, 42, 0.65);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.story-box h3 {
+  font-size: 1.08rem;
+  color: #fbbf24;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.story-box p {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+}
+
+/* Interactive Wood Cutter (Stage 1) */
+.wood-workshop {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.saw-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.saw-btn {
+  background: #334155;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 0.55rem 0.95rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.saw-btn:hover {
+  border-color: #fbbf24;
+  transform: translateY(-2px);
+}
+
+.saw-btn.selected {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-color: #fde68a;
+}
+
+.saw-btn.valid-found {
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+.log-row {
+  margin-bottom: 1rem;
+}
+
+.log-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wood-bar {
+  display: flex;
+  height: 44px;
+  background: #451a03;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #78350f;
+}
+
+.wood-piece {
+  background: linear-gradient(180deg, #d97706, #b45309);
+  border-right: 2px dashed #fde68a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fffbeb;
+  transition: all 0.3s ease;
+}
+
+.wood-rem {
+  background: repeating-linear-gradient(
+    45deg,
+    #dc2626,
+    #dc2626 8px,
+    #991b1b 8px,
+    #991b1b 16px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* Number Chips & Venn Diagram (Stage 2) */
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0.75rem 0 1.1rem;
+}
+
+.num-chip {
+  min-width: 48px;
+  height: 44px;
+  padding: 0 0.75rem;
+  border-radius: 11px;
+  background: #334155;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s;
+}
+
+.num-chip:hover {
+  border-color: #60a5fa;
+  transform: scale(1.05);
+}
+
+.num-chip.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-color: #93c5fd;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+.num-chip.common-active {
+  background: linear-gradient(135deg, #f59e0b, #b45309);
+  border-color: #fde68a;
+}
+
+/* Prime Factorization Lab (Stage 3) */
+.step-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.step-card h4 {
+  color: #93c5fd;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+}
+
+.formula-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.exp-input {
+  width: 64px;
+  text-align: center;
+  padding: 0.45rem;
+  border-radius: 8px;
+  border: 2px solid #475569;
+  background: #0f172a;
+  color: #fbbf24;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.exp-input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+/* Multiple Choice Options */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.option-btn {
+  background: rgba(51, 65, 85, 0.7);
+  border: 2px solid var(--border-color);
+  color: #fff;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #60a5fa;
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.option-btn.selected {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.28);
+}
+
+.option-btn.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.25);
+}
+
+.option-btn.wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Feedback Banner */
+.feedback-box {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: none;
+}
+
+.feedback-box.show {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+.feedback-box.ok {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid #10b981;
+  color: #a7f3d0;
+}
+
+.feedback-box.err {
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid #ef4444;
+  color: #fecaca;
+}
+
+/* Modals (Casio GCD Calculator & Handbook) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(5px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-card {
+  background: #1e293b;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Virtual Casio Calculator */
+.casio-body {
+  background: #111827;
+  border: 3px solid #374151;
+  border-radius: 20px;
+  padding: 1.2rem;
+  max-width: 350px;
+  margin: 0 auto;
+  box-shadow: inset 0 2px 6px rgba(255,255,255,0.08), 0 12px 24px rgba(0,0,0,0.5);
+}
+
+.casio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-bottom: 0.6rem;
+}
+
+.casio-lcd {
+  background: #d1fae5;
+  color: #064e3b;
+  font-family: 'Courier New', monospace;
+  border-radius: 10px;
+  padding: 0.75rem;
+  min-height: 76px;
+  margin-bottom: 0.9rem;
+  border: 3px solid #374151;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lcd-expr {
+  font-size: 0.95rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.lcd-res {
+  font-size: 1.35rem;
+  font-weight: 900;
+  text-align: right;
+}
+
+.casio-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+}
+
+.c-key {
+  padding: 0.65rem 0.3rem;
+  border-radius: 8px;
+  border: none;
+  background: #374151;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.c-key:hover {
+  background: #4b5563;
+}
+
+.c-key.gcd-btn {
+  background: #b45309;
+  color: #fef3c7;
+}
+
+.c-key.eq-btn {
+  background: #2563eb;
+}
+
+.c-key.ac-btn {
+  background: #dc2626;
+}
+
+/* Certificate Card */
+.cert-card {
+  background: linear-gradient(135deg, #1e1b4b, #0f172a);
+  border: 3px double #fbbf24;
+  border-radius: 22px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.25);
+}
+
+.cert-title {
+  color: #fbbf24;
+  font-size: 1.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0.5rem 0;
+}
+
+/* Euclid Machine */
+.euclid-step {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Lesson Switcher Bar */
+.lesson-switcher {
+  background: rgba(30, 41, 59, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.45rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.lesson-tab {
+  text-decoration: none;
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lesson-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.lesson-tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-color: rgba(147, 197, 253, 0.5);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+}
+
+/* Music Equalizer Indicator */
+.bgm-pill {
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(167, 139, 250, 0.45);
+  color: #ddd6fe;
+  padding: 0.38rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.bgm-pill.muted {
+  background: rgba(100, 116, 139, 0.2);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #94a3b8;
+}
+
+.eq-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.eq-bar {
+  width: 3px;
+  background: #a78bfa;
+  border-radius: 2px;
+  animation: eqBounce 0.6s infinite ease-in-out alternate;
+}
+
+.eq-bar:nth-child(2) { animation-delay: 0.2s; }
+.eq-bar:nth-child(3) { animation-delay: 0.4s; }
+
+.bgm-pill.muted .eq-bar {
+  animation: none;
+  height: 3px !important;
+  background: #64748b;
+}
+
+@keyframes eqBounce {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+/* Bai 12 - Stage 1: Supermarket Party Game */
+.party-shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.shop-counter {
+  background: rgba(15, 23, 42, 0.78);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
+  text-align: center;
+}
+
+.item-packs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  min-height: 58px;
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+}
+
+.pack-box {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Bai 12 - Stage 2: Frog Number Line Pond */
+.pond-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(66px, 1fr));
+  gap: 0.5rem;
+  margin: 0.85rem 0 1.15rem;
+}
+
+.lily-pad {
+  background: rgba(16, 185, 129, 0.14);
+  border: 2px solid rgba(16, 185, 129, 0.35);
+  border-radius: 50% 50% 45% 50%;
+  padding: 0.55rem 0.3rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s;
+  user-select: none;
+}
+
+.lily-pad:hover {
+  transform: translateY(-3px);
+  border-color: #34d399;
+}
+
+.lily-pad.selected-common {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-color: #fef08a;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.5);
+}
+
+.lily-num {
+  font-weight: 900;
+  font-size: 0.98rem;
+  color: #fff;
+}
+
+.lily-frogs {
+  font-size: 0.82rem;
+  min-height: 18px;
+}
+
+/* Bai 12 - Stage 3: Factory Maintenance Timeline */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  gap: 0.4rem;
+  margin: 0.85rem 0;
+}
+
+.month-cell {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.4rem 0.2rem;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+.month-cell.both-machines {
+  background: rgba(16, 185, 129, 0.25);
+  border: 2px solid #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+/* ==========================================================================
+   NHÂN VẬT ĐỒNG HÀNH SGK KẾT NỐI TRI THỨC: PI, VUÔNG, TRÒN
+   ========================================================================== */
+.companion-picker {
+  margin: 1rem auto 1.4rem;
+  max-width: 580px;
+}
+
+.companion-picker-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fde68a;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.companion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .companion-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.companion-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0.85rem 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.companion-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(147, 197, 253, 0.6);
+}
+
+.companion-card.selected {
+  background: linear-gradient(145deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25));
+  border-color: #fbbf24;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
+}
+
+.char-avatar-svg {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 0.4rem;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  animation: charFloat 2.8s infinite ease-in-out alternate;
+}
+
+@keyframes charFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-4px); }
+}
+
+.companion-name {
+  font-weight: 800;
+  font-size: 0.96rem;
+  color: #fff;
+}
+
+.companion-role {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* Khung Hội Thoại Nhân Vật Pi - Vuông - Tròn trong từng ải */
+.mascot-dialogue-box {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.92));
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  border-radius: 18px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.mascot-dialogue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.mascot-dialogue-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #93c5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mascot-chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mascot-chat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 0.65rem 0.85rem;
+  border-left: 4px solid transparent;
+  animation: fadeIn 0.25s ease;
+}
+
+.mascot-chat-item.char-vuong {
+  border-left-color: #3b82f6;
+}
+
+.mascot-chat-item.char-tron {
+  border-left-color: #f97316;
+}
+
+.mascot-chat-item.char-pi {
+  border-left-color: #a855f7;
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.mascot-chat-avatar {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.mascot-chat-content {
+  flex: 1;
+  font-size: 0.92rem;
+}
+
+.mascot-speaker-badge {
+  font-weight: 800;
+  font-size: 0.82rem;
+  margin-bottom: 0.15rem;
+  display: inline-block;
+}
+
+.char-vuong .mascot-speaker-badge { color: #60a5fa; }
+.char-tron .mascot-speaker-badge { color: #fb923c; }
+.char-pi .mascot-speaker-badge { color: #c084fc; }
+
+.mascot-hint-banner {
+  margin-top: 0.7rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fef3c7;
+  font-size: 0.88rem;
+  display: none;
+}
+
+.mascot-hint-banner.show {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
