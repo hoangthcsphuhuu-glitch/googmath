@@ -1097,78 +1097,137 @@ const Mascots = {
   }
 };
 
-/* Tự động đồng bộ Thanh điều hướng gọn nhẹ (Nháy chuột mới hiện danh sách 12 bài học) */
+/* Dữ liệu & hàm dựng Cây Thư Mục Bài Học (Folder Tree Explorer) */
+const GOOGMATH_FOLDER_TREE = [
+  {
+    id: 'ch1',
+    name: 'Chương I: Tập hợp các số tự nhiên',
+    badge: '7 bài • Tuần 1–4',
+    items: [
+      { href: 'bai1.html', label: '📘 Bài 1: Tập hợp', meta: 'Tiết 1' },
+      { href: 'bai2.html', label: '🏛️ Bài 2: Cách ghi số tự nhiên', meta: 'Tiết 2–3' },
+      { href: 'bai3.html', label: '📏 Bài 3: Thứ tự trong tập hợp số tự nhiên', meta: 'Tiết 4' },
+      { href: 'bai4.html', label: '➕ Bài 4: Phép cộng và phép trừ số tự nhiên', meta: 'Tiết 5–6' },
+      { href: 'bai5.html', label: '✖️ Bài 5: Phép nhân và phép chia số tự nhiên', meta: 'Tiết 7–9' },
+      { href: 'bai6.html', label: '♟️ Bài 6: Lũy thừa với số mũ tự nhiên', meta: 'Tiết 10–11' },
+      { href: 'bai7.html', label: '🧮 Bài 7: Thứ tự thực hiện các phép tính', meta: 'Tiết 12–16' }
+    ]
+  },
+  {
+    id: 'ch2',
+    name: 'Chương II: Tính chia hết trong ℕ',
+    badge: '5 bài • Tuần 5–7',
+    items: [
+      { href: 'bai8.html', label: '⚖️ Bài 8: Quan hệ chia hết và tính chất', meta: 'Tiết 17–18' },
+      { href: 'bai9.html', label: '🔍 Bài 9: Dấu hiệu chia hết', meta: 'Tiết 19–20' },
+      { href: 'bai10.html', label: '🌸 Bài 10: Số nguyên tố', meta: 'Tiết 21–24' },
+      { href: 'index.html', label: '👑 Bài 11: Ước chung & ƯCLN', meta: 'Tiết 25–27' },
+      { href: 'bai12.html', label: '🚀 Bài 12: Bội chung & BCNN', meta: 'Tiết 28–30' }
+    ]
+  },
+  {
+    id: 'ai',
+    name: 'Sổ tay & Trợ lý AI Khối 6',
+    badge: '2 tiện ích',
+    items: [
+      { href: 'sotay.html', label: '📖 Sổ Tay Hỏi Đáp Toán 6', meta: 'Chatbot Toán' },
+      { href: 'tuvan.html', label: '💚 Tư Vấn Học Đường Khối 6', meta: 'Tâm lý Khối 6' }
+    ]
+  }
+];
+
+function isCurrentHref(href, currentFile) {
+  return currentFile === href.toLowerCase() || (currentFile === '' && href === 'index.html');
+}
+
+function renderGoogmathFolderTreeHTML(prefix, currentFile) {
+  return `
+    <div class="tree-explorer">
+      ${GOOGMATH_FOLDER_TREE.map(folder => {
+        const hasActive = folder.items.some(it => isCurrentHref(it.href, currentFile));
+        const folderDomId = `${prefix}-folder-${folder.id}`;
+        const iconDomId = `${prefix}-icon-${folder.id}`;
+        return `
+          <div class="tree-folder${hasActive ? ' open' : ''}" id="${folderDomId}">
+            <button type="button" class="tree-folder-btn" onclick="toggleTreeFolder('${folderDomId}', '${iconDomId}', event)">
+              <span class="tree-folder-left">
+                <span class="tree-caret">▸</span>
+                <span class="tree-folder-icon" id="${iconDomId}">${hasActive ? '📂' : '📁'}</span>
+                <span class="tree-folder-name">${folder.name}</span>
+              </span>
+              <span class="tree-folder-count">${folder.badge}</span>
+            </button>
+            <div class="tree-children">
+              ${folder.items.map(it => {
+                const active = isCurrentHref(it.href, currentFile);
+                return `
+                  <a href="${it.href}" class="tree-node${active ? ' active' : ''}">
+                    <span class="tree-node-label">
+                      <span>📄</span>
+                      <span style="overflow:hidden; text-overflow:ellipsis;">${it.label}</span>
+                    </span>
+                    <span class="tree-node-meta">${active ? 'Đang mở' : it.meta}</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function toggleTreeFolder(folderDomId, iconDomId, e) {
+  if (e) e.stopPropagation();
+  if (typeof Sound !== 'undefined' && Sound.click) Sound.click();
+  const folderEl = document.getElementById(folderDomId);
+  const iconEl = document.getElementById(iconDomId);
+  if (!folderEl) return;
+  const isOpen = folderEl.classList.toggle('open');
+  if (iconEl) iconEl.textContent = isOpen ? '📂' : '📁';
+}
+
+/* Tự động đồng bộ Thanh điều hướng Cây thư mục gọn nhẹ (Nháy chuột mới hiện cây thư mục) */
 function syncGoogmathNavBar() {
   const nav = document.querySelector('.lesson-switcher, .googmath-top-nav');
-  if (!nav) return;
-
   const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
-  const ch1Items = [
-    { href: 'bai1.html', label: '📘 Bài 1: Tập hợp' },
-    { href: 'bai2.html', label: '🏛️ Bài 2: Ghi số tự nhiên' },
-    { href: 'bai3.html', label: '📏 Bài 3: Thứ tự trong ℕ' },
-    { href: 'bai4.html', label: '➕ Bài 4: Cộng & Trừ' },
-    { href: 'bai5.html', label: '✖️ Bài 5: Nhân & Chia' },
-    { href: 'bai6.html', label: '♟️ Bài 6: Lũy thừa' },
-    { href: 'bai7.html', label: '🧮 Bài 7: Thứ tự phép tính' }
-  ];
+  const allItems = GOOGMATH_FOLDER_TREE.flatMap(f => f.items);
+  const activeItem = allItems.find(it => isCurrentHref(it.href, currentFile)) || GOOGMATH_FOLDER_TREE[1].items[3];
 
-  const ch2Items = [
-    { href: 'bai8.html', label: '⚖️ Bài 8: Quan hệ chia hết' },
-    { href: 'bai9.html', label: '🔍 Bài 9: Dấu hiệu chia hết' },
-    { href: 'bai10.html', label: '🌸 Bài 10: Số nguyên tố' },
-    { href: 'index.html', label: '👑 Bài 11: Ước chung & ƯCLN' },
-    { href: 'bai12.html', label: '🚀 Bài 12: Bội chung & BCNN' }
-  ];
-
-  const aiItems = [
-    { href: 'sotay.html', label: '📖 Sổ Tay Hỏi Đáp Toán 6' },
-    { href: 'tuvan.html', label: '💚 Tư Vấn Học Đường Khối 6' }
-  ];
-
-  const allItems = [...ch1Items, ...ch2Items, ...aiItems];
-  const activeItem = allItems.find(
-    it => currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html')
-  ) || ch2Items[3];
-
-  const renderLinks = (list) => list.map(it => {
-    const isActive = currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html');
-    return `<a href="${it.href}" class="lesson-tab${isActive ? ' active' : ''}" style="justify-content:flex-start;">${it.label}</a>`;
-  }).join('');
-
-  nav.innerHTML = `
-    <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
-      <a href="index.html" class="nav-brand-mini" title="Về Trang Chủ GoogMath">
-        🌐 GOOGMATH • TOÁN 6
-      </a>
-      <div class="nav-dropdown-wrapper" id="nav-lesson-dropdown">
-        <button type="button" class="nav-dropdown-btn" onclick="toggleGoogmathMenu(event)" title="Nháy chuột để mở hoặc thu gọn danh sách 12 bài học">
-          <span>📚 ${activeItem.label}</span>
-          <span id="nav-dropdown-caret">▾ Chọn bài</span>
-        </button>
-        <div class="nav-dropdown-panel" id="nav-dropdown-panel">
-          <div class="nav-chapter-group">
-            <div class="nav-chapter-title">📘 Chương I: Tập hợp các số tự nhiên (Bài 1 – Bài 7)</div>
-            <div class="nav-chapter-grid">${renderLinks(ch1Items)}</div>
-          </div>
-          <div class="nav-chapter-group">
-            <div class="nav-chapter-title" style="color:#f472b6;">⚖️ Chương II: Tính chia hết trong ℕ (Bài 8 – Bài 12)</div>
-            <div class="nav-chapter-grid">${renderLinks(ch2Items)}</div>
-          </div>
-          <div class="nav-chapter-group">
-            <div class="nav-chapter-title" style="color:#34d399;">🤖 Trợ Lý AI &amp; Tư Vấn Học Đường</div>
-            <div class="nav-chapter-grid">${renderLinks(aiItems)}</div>
+  if (nav) {
+    nav.innerHTML = `
+      <div style="display:flex; align-items:center; gap:0.5rem; min-width:0;">
+        <a href="index.html" class="nav-brand-mini" title="Về Trang Chủ GoogMath">
+          <span>🌐</span> <span class="brand-sub">GOOGMATH</span>
+        </a>
+        <div class="nav-dropdown-wrapper" id="nav-lesson-dropdown">
+          <button type="button" class="nav-dropdown-btn" onclick="toggleGoogmathMenu(event)" title="Nháy chuột để mở Cây thư mục 12 bài học Toán 6">
+            <span>📁 ${activeItem.label}</span>
+            <span id="nav-dropdown-caret">▾ Cây bài học</span>
+          </button>
+          <div class="nav-dropdown-panel" id="nav-dropdown-panel" onclick="event.stopPropagation()">
+            <div class="tree-header-bar">
+              <div class="tree-root-title">🗄️ CÂY THƯ MỤC TOÁN 6 (GV: LÝ HOÀNG EM)</div>
+              <button type="button" class="tree-close-btn" onclick="toggleGoogmathMenu(event)">✖ Đóng</button>
+            </div>
+            ${renderGoogmathFolderTreeHTML('topnav', currentFile)}
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="nav-compact-actions">
-      <a href="sotay.html" class="lesson-tab${currentFile === 'sotay.html' ? ' active' : ''}">📖 Sổ Tay</a>
-      <a href="tuvan.html" class="lesson-tab${currentFile === 'tuvan.html' ? ' active' : ''}">💚 Tư Vấn</a>
-    </div>
-  `;
+      <div class="nav-compact-actions">
+        <a href="sotay.html" class="lesson-tab${currentFile === 'sotay.html' ? ' active' : ''}">📖 Sổ Tay</a>
+        <a href="tuvan.html" class="lesson-tab${currentFile === 'tuvan.html' ? ' active' : ''}">💚 Tư Vấn</a>
+      </div>
+    `;
+  }
+
+  const homeTreeMount = document.getElementById('home-tree-mount');
+  if (homeTreeMount) {
+    homeTreeMount.innerHTML = renderGoogmathFolderTreeHTML('hometree', currentFile);
+  }
 }
 
 function toggleGoogmathMenu(e) {
@@ -1177,7 +1236,7 @@ function toggleGoogmathMenu(e) {
   const caret = document.getElementById('nav-dropdown-caret');
   if (!panel) return;
   const isOpen = panel.classList.toggle('open');
-  if (caret) caret.textContent = isOpen ? '▴ Thu gọn' : '▾ Chọn bài';
+  if (caret) caret.textContent = isOpen ? '▴ Thu gọn' : '▾ Cây bài học';
 }
 
 function toggleHudToolsMenu(e) {
@@ -1247,7 +1306,7 @@ document.addEventListener('click', (e) => {
   if (navPanel && navPanel.classList.contains('open') && navWrapper && !navWrapper.contains(e.target)) {
     navPanel.classList.remove('open');
     const caret = document.getElementById('nav-dropdown-caret');
-    if (caret) caret.textContent = '▾ Chọn bài';
+    if (caret) caret.textContent = '▾ Cây bài học';
   }
 
   const hudPanel = document.getElementById('hud-dropdown-panel');

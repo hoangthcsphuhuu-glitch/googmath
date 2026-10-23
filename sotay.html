@@ -64,37 +64,45 @@
 </head>
 <body>
 
-  <!-- Thanh điều hướng tích hợp GOOGMATH (Thu gọn mặc định, nháy chuột mới hiện) -->
-  <nav class="googmath-top-nav" style="justify-content:space-between; padding:0.4rem 1rem;">
-    <div style="display:flex; align-items:center; gap:0.6rem; position:relative;">
-      <a href="index.html" style="font-size:0.82rem; color:#fde68a; font-weight:800; text-decoration:none;">🌐 GOOGMATH • TOÁN 6</a>
+  <!-- Thanh điều hướng tích hợp GOOGMATH (Cây thư mục thu gọn mặc định, nháy chuột mới hiện) -->
+  <nav class="googmath-top-nav" style="justify-content:space-between; padding:0.4rem 0.75rem;">
+    <div style="display:flex; align-items:center; gap:0.5rem; position:relative;">
+      <a href="index.html" style="font-size:0.8rem; color:#fde68a; font-weight:800; text-decoration:none;">🌐 GOOGMATH</a>
       <button type="button" class="googmath-nav-tab active" style="cursor:pointer;" onclick="const p=document.getElementById('sotay-nav-panel'); if(p) p.style.display = p.style.display==='block' ? 'none' : 'block'; event.stopPropagation();">
-        📚 Chọn Bài Học (Bài 1 – 12) ▾
+        📁 Cây Bài Học (1–12) ▾
       </button>
-      <div id="sotay-nav-panel" onclick="event.stopPropagation()" style="display:none; position:absolute; top:calc(100% + 8px); left:0; width:min(640px, 94vw); background:#0f172a; border:1px solid rgba(147,197,253,0.4); border-radius:14px; padding:0.8rem; box-shadow:0 16px 36px rgba(0,0,0,0.65); z-index:2000;">
-        <div style="font-size:0.75rem; font-weight:800; color:#93c5fd; margin-bottom:0.4rem;">📘 CHƯƠNG I (BÀI 1 – BÀI 7)</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:0.35rem; margin-bottom:0.65rem;">
-          <a href="bai1.html" class="googmath-nav-tab">📘 Bài 1: Tập hợp</a>
-          <a href="bai2.html" class="googmath-nav-tab">🏛️ Bài 2: Ghi số tự nhiên</a>
-          <a href="bai3.html" class="googmath-nav-tab">📏 Bài 3: Thứ tự trong ℕ</a>
-          <a href="bai4.html" class="googmath-nav-tab">➕ Bài 4: Cộng &amp; Trừ</a>
-          <a href="bai5.html" class="googmath-nav-tab">✖️ Bài 5: Nhân &amp; Chia</a>
-          <a href="bai6.html" class="googmath-nav-tab">♟️ Bài 6: Lũy thừa</a>
-          <a href="bai7.html" class="googmath-nav-tab">🧮 Bài 7: Thứ tự phép tính</a>
+      <div id="sotay-nav-panel" onclick="event.stopPropagation()" style="display:none; position:fixed; top:44px; left:8px; width:min(520px, calc(100vw - 16px)); max-height:80vh; overflow-y:auto; background:#0f172a; border:1px solid rgba(147,197,253,0.4); border-radius:14px; padding:0.75rem; box-shadow:0 16px 36px rgba(0,0,0,0.75); z-index:2000;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.1);">
+          <span style="font-size:0.78rem; font-weight:800; color:#fde68a;">🗄️ CÂY THƯ MỤC TOÁN 6</span>
+          <button type="button" onclick="document.getElementById('sotay-nav-panel').style.display='none'" style="background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:6px; padding:2px 8px; font-size:0.74rem; cursor:pointer;">✖ Đóng</button>
         </div>
-        <div style="font-size:0.75rem; font-weight:800; color:#f472b6; margin-bottom:0.4rem;">⚖️ CHƯƠNG II (BÀI 8 – BÀI 12)</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:0.35rem;">
-          <a href="bai8.html" class="googmath-nav-tab">⚖️ Bài 8: Quan hệ chia hết</a>
-          <a href="bai9.html" class="googmath-nav-tab">🔍 Bài 9: Dấu hiệu chia hết</a>
-          <a href="bai10.html" class="googmath-nav-tab">🌸 Bài 10: Số nguyên tố</a>
-          <a href="index.html" class="googmath-nav-tab">👑 Bài 11: ƯC &amp; ƯCLN</a>
-          <a href="bai12.html" class="googmath-nav-tab">🚀 Bài 12: BC &amp; BCNN</a>
-        </div>
+        <details style="margin-bottom:0.5rem; background:rgba(30,41,59,0.75); border-radius:10px; padding:0.45rem 0.65rem; border:1px solid rgba(255,255,255,0.1);">
+          <summary style="cursor:pointer; font-size:0.82rem; font-weight:800; color:#93c5fd;">📁 Chương I: Tập hợp các số tự nhiên (Bài 1 – 7)</summary>
+          <div style="display:flex; flex-direction:column; gap:0.3rem; margin-top:0.45rem; padding-left:0.65rem; border-left:1.5px solid rgba(148,163,184,0.35);">
+            <a href="bai1.html" class="googmath-nav-tab">📄 Bài 1: Tập hợp</a>
+            <a href="bai2.html" class="googmath-nav-tab">📄 Bài 2: Cách ghi số tự nhiên</a>
+            <a href="bai3.html" class="googmath-nav-tab">📄 Bài 3: Thứ tự trong ℕ</a>
+            <a href="bai4.html" class="googmath-nav-tab">📄 Bài 4: Phép cộng &amp; Phép trừ</a>
+            <a href="bai5.html" class="googmath-nav-tab">📄 Bài 5: Phép nhân &amp; Phép chia</a>
+            <a href="bai6.html" class="googmath-nav-tab">📄 Bài 6: Lũy thừa với số mũ tự nhiên</a>
+            <a href="bai7.html" class="googmath-nav-tab">📄 Bài 7: Thứ tự thực hiện phép tính</a>
+          </div>
+        </details>
+        <details style="background:rgba(30,41,59,0.75); border-radius:10px; padding:0.45rem 0.65rem; border:1px solid rgba(255,255,255,0.1);">
+          <summary style="cursor:pointer; font-size:0.82rem; font-weight:800; color:#f472b6;">📁 Chương II: Tính chia hết trong ℕ (Bài 8 – 12)</summary>
+          <div style="display:flex; flex-direction:column; gap:0.3rem; margin-top:0.45rem; padding-left:0.65rem; border-left:1.5px solid rgba(148,163,184,0.35);">
+            <a href="bai8.html" class="googmath-nav-tab">📄 Bài 8: Quan hệ chia hết &amp; Tính chất</a>
+            <a href="bai9.html" class="googmath-nav-tab">📄 Bài 9: Dấu hiệu chia hết</a>
+            <a href="bai10.html" class="googmath-nav-tab">📄 Bài 10: Số nguyên tố</a>
+            <a href="index.html" class="googmath-nav-tab">📄 Bài 11: Ước chung &amp; ƯCLN</a>
+            <a href="bai12.html" class="googmath-nav-tab">📄 Bài 12: Bội chung &amp; BCNN</a>
+          </div>
+        </details>
       </div>
     </div>
-    <div style="display:flex; gap:0.45rem; align-items:center;">
-      <a href="sotay.html" class="googmath-nav-tab active">📖 Sổ Tay Toán 6</a>
-      <a href="tuvan.html" class="googmath-nav-tab">💚 Tư Vấn Khối 6</a>
+    <div style="display:flex; gap:0.4rem; align-items:center;">
+      <a href="sotay.html" class="googmath-nav-tab active">📖 Sổ Tay</a>
+      <a href="tuvan.html" class="googmath-nav-tab">💚 Tư Vấn</a>
     </div>
   </nav>
   <script>document.addEventListener('click',()=>{const p=document.getElementById('sotay-nav-panel');if(p)p.style.display='none';});</script>
