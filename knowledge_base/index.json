@@ -1,0 +1,27 @@
+{
+  "processed_files": [
+    {
+      "filename": "cam_nang_toan_6.txt",
+      "display_name": "Cẩm nang chuyên sâu Toán 6 (Kết nối tri thức với cuộc sống)",
+      "txt_file": "cam_nang_toan_6.txt",
+      "grade": 6,
+      "status": "processed",
+      "total_pages": 35,
+      "extracted_pages": 35,
+      "chapters": [
+        {"number": "I", "title": "Tập hợp các số tự nhiên (Bài 1 - Bài 7: Tập hợp, Lũy thừa, Thứ tự thực hiện phép tính)", "type": "chương"},
+        {"number": "II", "title": "Tính chia hết trong tập hợp các số tự nhiên (Bài 8 - Bài 12: Dấu hiệu chia hết, Số nguyên tố, ƯCLN, BCNN)", "type": "chương"},
+        {"number": "III", "title": "Số nguyên (Bài 13 - Bài 17: Tập Z, Cộng trừ nhân chia số nguyên, Quy tắc dấu ngoặc)", "type": "chương"},
+        {"number": "IV", "title": "Một số hình phẳng trong thực tiễn (Bài 18 - Bài 20: Tam giác đều, Hình vuông, Lục giác đều, HCN, Hình thoi, HBH, Hình thang cân, Chu vi và diện tích)", "type": "chương"},
+        {"number": "V", "title": "Tính đối xứng của hình phẳng trong tự nhiên (Bài 21 - Bài 22: Hình có trục đối xứng, Hình có tâm đối xứng)", "type": "chương"},
+        {"number": "VI", "title": "Phân số (Bài 23 - Bài 27: Phân số bằng nhau, So sánh, Hỗn số dương, Cộng trừ nhân chia phân số, Hai bài toán về phân số)", "type": "chương"},
+        {"number": "VII", "title": "Số thập phân (Bài 28 - Bài 31: Tính toán số thập phân, Làm tròn và ước lượng, Tỉ số và tỉ số phần trăm)", "type": "chương"},
+        {"number": "VIII", "title": "Những hình học cơ bản (Bài 32 - Bài 37: Điểm, Đường thẳng, Tia, Đoạn thẳng, Trung điểm, Góc, Số đo góc)", "type": "chương"},
+        {"number": "IX", "title": "Dữ liệu và xác suất thực nghiệm (Bài 38 - Bài 43: Bảng thống kê, Biểu đồ tranh, Biểu đồ cột, Cột kép, Xác suất thực nghiệm)", "type": "chương"}
+      ]
+    }
+  ],
+  "total_files": 1,
+  "processed_count": 1,
+  "not_found_count": 0
+}
