@@ -111,7 +111,14 @@ const VoiceNarrator = {
 
     // Lũy thừa & phép toán
     s = s
+      .replace(/(\d+)\s*¹⁰⁰/g, '$1 mũ 100')
+      .replace(/(\d+)\s*²⁰/g, '$1 mũ 20')
+      .replace(/(\d+)\s*¹⁸/g, '$1 mũ 18')
+      .replace(/(\d+)\s*¹⁵/g, '$1 mũ 15')
+      .replace(/(\d+)\s*¹⁴/g, '$1 mũ 14')
+      .replace(/(\d+)\s*¹¹/g, '$1 mũ 11')
       .replace(/(\d+)\s*¹⁰/g, '$1 mũ 10')
+      .replace(/(\d+)\s*⁹/g, '$1 mũ 9')
       .replace(/(\d+)\s*⁸/g, '$1 mũ 8')
       .replace(/(\d+)\s*⁷/g, '$1 mũ 7')
       .replace(/(\d+)\s*⁶/g, '$1 mũ 6')
@@ -120,9 +127,13 @@ const VoiceNarrator = {
       .replace(/(\d+)\s*³/g, '$1 mũ 3')
       .replace(/(\d+)\s*²/g, '$1 mũ 2')
       .replace(/(\d+)\s*¹/g, '$1 mũ 1')
+      .replace(/(\d+)\s*⁰/g, '$1 mũ 0')
       .replace(/⋮/g, ' chia hết cho ')
+      .replace(/∤/g, ' không chia hết cho ')
       .replace(/∈/g, ' thuộc ')
-      .replace(/ℕ/g, ' tập hợp số tự nhiên ')
+      .replace(/∉/g, ' không thuộc ')
+      .replace(/ℕ\*/g, ' tập hợp N sao ')
+      .replace(/ℕ/g, ' tập hợp số tự nhiên N ')
       .replace(/≠/g, ' khác ')
       .replace(/≥/g, ' lớn hơn hoặc bằng ')
       .replace(/≤/g, ' nhỏ hơn hoặc bằng ')
@@ -544,8 +555,225 @@ const Mascots = {
     }
   },
 
-  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho Bài 8, Bài 9, Bài 10, Bài 11 và Bài 12 */
+  /* Kịch bản hội thoại của Pi, Vuông, Tròn cho trọn bộ Bài 1 đến Bài 12 */
   dialogues: {
+    bai1_1: {
+      tron: 'Trong lọ hoa có các bông hồng, trong bình cá có 3 chú cá vàng, còn Hình 1.3 có vòng tròn chứa các số 4, 1, 9, 8! Tất cả đều gọi là Tập hợp hả anh Pi?',
+      pi: 'Đúng rồi Tròn ơi! Một tập hợp bao gồm những đối tượng nhất định, và mỗi đối tượng đó được gọi là một phần tử của tập hợp!',
+      vuong: 'Vậy với tập hợp M = {4; 1; 9; 8} ở Hình 1.3, các số 4, 1, 9, 8 là phần tử của M, còn số 7 nằm ngoài vòng tròn nên không phải là phần tử của M!',
+      hint: 'Mẹo của Anh Pi: Tập hợp M gồm 4 phần tử là {1; 4; 8; 9}. Số 7 không thuộc tập hợp M!'
+    },
+    bai1_2: {
+      vuong: 'Khi muốn viết ngắn gọn x là phần tử của tập hợp A hoặc y không là phần tử của tập hợp A, mình dùng kí hiệu gì vậy anh Pi?',
+      pi: 'Ta viết x ∈ A (đọc là x thuộc A) và y ∉ A (đọc là y không thuộc A)! Rất ngắn gọn và chuẩn xác!',
+      tron: 'Còn tập hợp các số tự nhiên kí hiệu là ℕ = {0; 1; 2; 3; ...}, tập hợp các số tự nhiên khác 0 kí hiệu là ℕ* = {1; 2; 3; ...}!',
+      hint: 'Mẹo của Bạn Tròn: Điểm khác nhau duy nhất giữa ℕ và ℕ* là số 0: 0 ∈ ℕ nhưng 0 ∉ ℕ*!'
+    },
+    bai1_3: {
+      tron: 'Khi liệt kê các chữ cái trong từ NHA TRANG, bạn Nam viết L = {N; H; A; T; R; A; N; G}. Sao cô giáo lại bảo bạn Nam viết chưa đúng nhỉ?',
+      vuong: 'Vì quy tắc liệt kê các phần tử của tập hợp là: Mỗi phần tử chỉ được viết MỘT LẦN thôi! Chữ N và chữ A xuất hiện nhiều lần nhưng chỉ được viết 1 lần!',
+      pi: 'Chuẩn xác! Vậy tập hợp đúng phải là L = {N; H; A; T; R; G}. Ngoài cách liệt kê, ta còn có Cách 2 là nêu dấu hiệu đặc trưng cho các phần tử!',
+      hint: 'Mẹo của Bạn Vuông: Luyện tập 2: A = {0; 1; 2; 3; 4}, B = {1; 2; 3; 4}. Luyện tập 3: M = {7; 8; 9} hoặc M = {x ∈ ℕ | 6 < x < 10}!'
+    },
+    bai1_4: {
+      vuong: 'Ở Bài 1.3b trang 7, tập hợp D gồm các tháng (dương lịch) có 30 ngày trong một năm. Mình dùng quy tắc nắm bàn tay để đếm nhé!',
+      tron: 'Tháng Tư, Tháng Sáu, Tháng Chín và Tháng Mười một! Đúng 4 tháng có 30 ngày luôn!',
+      pi: 'Còn ở Bài 1.3c, các chữ cái trong cụm từ ĐIỆN BIÊN PHỦ (nhớ không lặp lại chữ Đ, I, Ê, N, B, P, H, U) tạo thành tập hợp M gồm 8 phần tử!',
+      hint: 'Mẹo của Anh Pi: Bài 1.2: Trong các số 3, 5, 6, 0, 7 thì các số chia hết cho 3 thuộc U là: 3, 6 và 0!'
+    },
+    bai1_5: {
+      tron: 'Ở Bài 1.5 trang 8, tập hợp S gồm 8 hành tinh của Hệ Mặt Trời! Mình thích khám phá vũ trụ lắm!',
+      vuong: 'Theo thứ tự từ gần Mặt Trời ra xa là: Thuỷ tinh, Kim tinh, Trái Đất, Hoả tinh, Mộc tinh, Thổ tinh, Thiên Vương tinh và Hải Vương tinh!',
+      pi: 'Còn Bài 1.4: Tập hợp A = {0; 1; 2; 3; 4; 5; 6; 7; 8; 9} viết bằng cách nêu dấu hiệu đặc trưng chính là A = {x ∈ ℕ | x < 10}!',
+      hint: 'Mẹo của Bạn Vuông: Hệ Mặt Trời có 8 hành tinh và Trái Đất là hành tinh thứ 3 tính từ Mặt Trời!'
+    },
+
+    bai2_1: {
+      tron: 'Trong hệ thập phân, chỉ từ 10 chữ số 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 mà mình có thể viết được mọi số tự nhiên lớn đến hàng tỉ luôn!',
+      vuong: 'Và cứ 10 đơn vị ở một hàng thì bằng 1 đơn vị ở hàng liền trước nó! Khi viết số có từ 4 chữ số trở lên, mình tách thành từng lớp 3 chữ số từ phải sang trái cho dễ đọc.',
+      pi: 'Ở câu hỏi ? trang 9, khi lập các số có 3 chữ số khác nhau từ {0; 1; 2}, các em nhớ chữ số hàng trăm phải khác 0 nhé!',
+      hint: 'Mẹo của Anh Pi: Từ ba chữ số 0, 1, 2 ta lập được 4 số tự nhiên có 3 chữ số khác nhau là: 102, 120, 201 và 210!'
+    },
+    bai2_2: {
+      vuong: 'Ở bài Vận dụng trang 10, bác Hoa mua đồ hết 492 nghìn đồng. Bác chỉ mang các tờ tiền 100 nghìn, 10 nghìn và 1 nghìn đồng.',
+      tron: 'Ta tách 492 = (4 × 100) + (9 × 10) + 2! Vậy bác Hoa chỉ cần đưa 4 tờ 100 nghìn, 9 tờ 10 nghìn và 2 tờ 1 nghìn đồng là vừa khít!',
+      pi: 'Đó chính là ứng dụng tuyệt vời của việc biểu diễn một số tự nhiên thành tổng giá trị các chữ số của nó theo từng hàng!',
+      hint: 'Mẹo của Bạn Tròn: Luyện tập tr. 10: 34 604 = (3 × 10 000) + (4 × 1 000) + (6 × 100) + 4!'
+    },
+    bai2_3: {
+      tron: 'Trên mặt đồng hồ cổ có các kí hiệu I, V, X... Đó là chữ số La Mã đúng không anh Pi?',
+      pi: 'Đúng rồi! Để viết các số La Mã không quá 30, ta dùng 5 thành phần cơ bản: I (1), V (5), X (10) và hai cụm đặc biệt IV (4), IX (9). Không có số La Mã nào biểu diễn số 0!',
+      vuong: 'Ở Thử thách nhỏ trang 11, dùng đúng 7 que tính, mình ghép được các số La Mã không quá 30 là: XVIII (18), XXIII (23), XXIV (24), XXVI (26) và XXIX (29)!',
+      hint: 'Mẹo của Bạn Vuông: 14 viết là XIV; 27 viết là XXVII; XVI là 16; XXII là 22!'
+    },
+    bai2_4: {
+      vuong: 'Ở Bài 1.6 trang 12, cùng là chữ số 7 nhưng ở mỗi số khác nhau thì giá trị của chữ số 7 lại khác nhau hoàn toàn!',
+      tron: 'Trong 27 501 thì chữ số 7 trị giá 7 000; trong 106 712 thì trị giá 700; trong 7 110 385 thì trị giá 7 000 000; còn trong 2 915 404 267 thì trị giá là 7!',
+      pi: 'Đó gọi là nguyên tắc giá trị theo vị trí của hệ thập phân đấy các em!',
+      hint: 'Mẹo của Anh Pi: Bài 1.8: XIV = 14, XVI = 16, XXIII = 23. Bài 1.9: 18 = XVIII, 25 = XXV!'
+    },
+    bai2_5: {
+      tron: 'Bài 1.10 trang 12 đố tụi mình viết số tự nhiên có 6 chữ số gồm ba chữ số 0 và ba chữ số 9 nằm xen kẽ nhau!',
+      vuong: 'Vì chữ số đầu tiên bên trái (hàng trăm nghìn) phải khác 0 nên bắt buộc phải bắt đầu bằng chữ số 9! Xen kẽ nhau sẽ là: 909 090!',
+      pi: 'Còn ở Bài 1.12, mua 9 hộp kẹo lớn (1000 cái/hộp), 9 hộp vừa (100 cái/hộp) và 9 hộp nhỏ (10 cái/hộp) thì tổng số kẹo là 9 × 1000 + 9 × 100 + 9 × 10 = 9 990 cái kẹo!',
+      hint: 'Mẹo của Bạn Vuông: Bài 1.11: Dùng {0, 3, 5} viết số có 3 chữ số khác nhau mà chữ số 5 có giá trị 50 (ở hàng chục), hàng trăm khác 0 ⇒ số 350!'
+    },
+
+    bai3_1: {
+      tron: 'Khi xếp hàng mua vé xem phim, người đến trước đứng trước, người đến sau đứng sau. Nhìn giống hệt các vạch số trên tia số nằm ngang!',
+      vuong: 'Trên tia số nằm ngang gốc O, nếu số a nhỏ hơn số b (a < b) thì điểm a sẽ nằm bên trái (nằm trước) điểm b!',
+      pi: 'Và các em nhớ nhé: Số 0 là số tự nhiên nhỏ nhất nên số 0 không có số tự nhiên liền trước! Mọi số tự nhiên đều có đúng một số liền sau.',
+      hint: 'Mẹo của Anh Pi: Số liền trước của a (với a > 0) là a - 1; số liền sau của a là a + 1!'
+    },
+    bai3_2: {
+      vuong: 'Khi so sánh hai số tự nhiên có nhiều chữ số như m = 12 036 001 và n = 12 035 987 ở Luyện tập trang 14, mình so sánh thế nào cho nhanh nhỉ?',
+      pi: 'Vì hai số có cùng 8 chữ số, ta so sánh từng cặp chữ số ở cùng một hàng từ trái sang phải. Hàng nghìn của m là 6 lớn hơn hàng nghìn của n là 5, nên m > n!',
+      tron: 'Còn ở bài Vận dụng: Tiền bán hàng buổi tối < buổi chiều, mà buổi chiều < buổi sáng. Nhờ tính chất bắc cầu, mình biết ngay buổi sáng thu nhiều tiền hơn buổi tối!',
+      hint: 'Mẹo của Bạn Tròn: Vì n < m nên trên tia số nằm ngang, điểm n nằm trước (bên trái) điểm m!'
+    },
+    bai3_3: {
+      tron: 'Kí hiệu a ≤ b đọc là "a nhỏ hơn hoặc bằng b", nghĩa là lấy cả trường hợp a = b nữa đúng không Vuông?',
+      vuong: 'Đúng rồi! Ví dụ trong các số {3; 5; 8; 9}, tập hợp A = {x ∈ ℕ | x ≥ 5} sẽ lấy cả số 5, số 8 và số 9!',
+      pi: 'Còn tập hợp B = {x ∈ ℕ | x ≤ 5} sẽ lấy các số 3 và 5. Khi làm Bài 1.15, các em nhớ để ý kỹ dấu < và dấu ≤ nhé!',
+      hint: 'Mẹo của Bạn Vuông: Bài 1.15: a) M = {10; 11; 12; 13; 14}; b) K = {1; 2; 3} (vì x ∈ ℕ*); c) L = {0; 1; 2; 3} (vì x ∈ ℕ)!'
+    },
+    bai3_4: {
+      vuong: 'Ở Bài 1.13 trang 14, tìm số liền trước và số liền sau của 3 532 và 3 529, rồi sắp xếp cả 6 số theo thứ tự từ bé đến lớn!',
+      tron: 'Của 3 532 là 3 531 và 3 533; của 3 529 là 3 528 và 3 530. Khi xếp từ bé đến lớn, mình được dãy 6 số tự nhiên liên tiếp từ 3 528 đến 3 533 luôn!',
+      pi: 'Còn ở Bài 1.14, trên tia số điểm a làm mốc nhỏ nhất, điểm b nằm giữa a và c nên thứ tự đúng là a < b < c!',
+      hint: 'Mẹo của Anh Pi: Dãy 6 số từ bé đến lớn ở Bài 1.13 là: 3 528; 3 529; 3 530; 3 531; 3 532; 3 533!'
+    },
+    bai3_5: {
+      tron: 'Ở Bài 1.16 trang 14, chiều cao của An là 150 cm, Bắc là 153 cm, Cường là 148 cm. Ba bạn đánh dấu chiều cao lên cột tường là A, B, C từ dưới lên!',
+      vuong: 'Vì 148 < 150 < 153 nên từ thấp đến cao phải là: Cường (điểm A), An (điểm B), Bắc (điểm C). Vậy bạn Cường nói A là An, B là Bắc, C là Cường là sai rồi!',
+      pi: 'Và ở phần Năng lực số 4.2TC1a, khi đặt mật khẩu tài khoản học tập, các em tuyệt đối tránh dùng dãy số tự nhiên liên tiếp như 123456 hay 654321 vì rất dễ bị đoán ra nhé!',
+      hint: 'Mẹo của Bạn Vuông: Từ dưới lên trên: A là Cường (148 cm), B là An (150 cm), C là Bắc (153 cm)!'
+    },
+
+    bai4_1: {
+      tron: 'Mai đi chợ mua cà tím hết 18 nghìn đồng, cà chua hết 21 nghìn đồng và rau cải hết 30 nghìn đồng. Mai đưa tờ 100 nghìn đồng thì cô bán hàng trả lại bao nhiêu nhỉ?',
+      vuong: 'Đầu tiên mình dùng phép cộng tính tổng tiền mua rau củ: 18 + 21 + 30 = 69 nghìn đồng. Sau đó dùng phép trừ: 100 - 69 = 31 nghìn đồng!',
+      pi: 'Bài toán đi chợ của Mai cho thấy phép cộng và phép trừ số tự nhiên gắn bó mật thiết với nhau trong cuộc sống hằng ngày!',
+      hint: 'Mẹo của Bạn Tròn: Tổng tiền mua là 69 000 đồng, tiền thừa nhận lại là 100 000 - 69 000 = 31 000 đồng!'
+    },
+    bai4_2: {
+      vuong: 'Khi tính tổng 117 + 68 + 23 ở Luyện tập 1 trang 16, nếu mình cộng từ trái sang phải thì hơi lẻ. Có cách nào tính nhẩm nhanh hơn không anh Pi?',
+      pi: 'Ta áp dụng tính chất giao hoán và kết hợp để nhóm các số hạng có chữ số tận cùng cộng lại tròn chục, tròn trăm: (117 + 23) + 68 = 140 + 68 = 208!',
+      tron: 'Hay quá! Ở Bài 1.22a cũng vậy: 285 + 470 + 115 + 230 = (285 + 115) + (470 + 230) = 400 + 700 = 1 100!',
+      hint: 'Mẹo của Anh Pi: Vận dụng 1 (tr. 15): Diện tích lúa Thu Đông ĐBSCL là 713 200 + 14 500 = 727 700 (ha). Bài 1.22b: (571 + 129) + (216 + 124) = 700 + 340 = 1 040!'
+    },
+    bai4_3: {
+      tron: 'Anh Pi ơi, trong tập hợp các số tự nhiên ℕ, có phải lúc nào phép trừ a - b cũng thực hiện được không ạ?',
+      pi: 'Không đâu nhé! Trong tập hợp số tự nhiên ℕ, phép trừ a - b chỉ thực hiện được khi số bị trừ lớn hơn hoặc bằng số trừ (a ≥ b)!',
+      vuong: 'Và nhờ mối quan hệ a - b = c ⇔ a = b + c, tụi mình dễ dàng tìm được thành phần chưa biết x trong Bài 1.19!',
+      hint: 'Mẹo của Bạn Vuông: Luyện tập 2: 865 279 - 45 027 = 820 252. Bài 1.19: a) x = 362 - 7 = 355; b) x = 25 - 15 = 10; c) x = 4 + 56 = 60!'
+    },
+    bai4_4: {
+      vuong: 'Ở Bài 1.18 trang 16, cổng trường có ghi phép toán bí ẩn: ? + 2 895 = 2 895 + 6 789. Tìm số ở dấu hỏi chấm mà không cần đặt tính cộng!',
+      tron: 'Nhờ tính chất giao hoán a + b = b + a, mình nhìn thấy ngay dấu "?" chính là số 6 789 mà không tốn một giây đặt tính nào!',
+      pi: 'Rất thông minh! Còn ở Bài 1.17, các em hãy đặt tính thẳng hàng các chữ số cùng hàng để tính tổng và hiệu thật chính xác nhé!',
+      hint: 'Mẹo của Anh Pi: Bài 1.17: a) 3 548 + 19 256 = 22 804; b) 129 107 - 34 693 = 94 414!'
+    },
+    bai4_5: {
+      tron: 'Ở Bài 1.21 trang 16, sân bay Tân Sơn Nhất dự kiến có tổng công suất 3 nhà ga là 22 851 200 lượt khách/năm. Nhà ga T1 và T2 tiếp nhận 6 526 300 và 3 514 500 lượt khách.',
+      vuong: 'Vậy số lượt hành khách nhà ga T3 tiếp nhận mỗi năm là: 22 851 200 - (6 526 300 + 3 514 500) = 22 851 200 - 10 040 800 = 12 810 400 lượt khách!',
+      pi: 'Các em có thể bấm nút "🧮 Máy tính Cộng & Trừ" ở góc trên để kiểm tra lại các con số thống kê lớn này theo đúng chuẩn Năng lực số 5.1TC1a nhé!',
+      hint: 'Mẹo của Bạn Vuông: Bài 1.20: Dân số Việt Nam năm 2020 là 96 462 106 + 876 473 = 97 338 579 (người)!'
+    },
+
+    bai5_1: {
+      tron: 'Mẹ mua một túi 10 kg gạo ngon giá 20 nghìn đồng mỗi ki-lô-gam. Mẹ đưa tiền bằng các tờ mệnh giá 50 nghìn đồng thì cần đưa mấy tờ nhỉ?',
+      vuong: 'Tiền mua 10 kg gạo là phép nhân: 10 × 20 = 200 nghìn đồng. Số tờ 50 nghìn đồng cần đưa là phép chia: 200 : 50 = 4 tờ!',
+      pi: 'Đó chính là sự kết hợp nhịp nhàng giữa phép nhân và phép chia số tự nhiên trong đời sống!',
+      hint: 'Mẹo của Bạn Tròn: Tiền gạo = 200 nghìn đồng; số tờ 50 nghìn đồng cần đưa là 200 : 50 = 4 tờ!'
+    },
+    bai5_2: {
+      vuong: 'Anh Pi ơi, khi tính nhẩm phép nhân nhiều thừa số như 125 · 8 001 · 8 ở Luyện tập 2 trang 18, có cặp số vàng nào giúp tính siêu tốc không ạ?',
+      pi: 'Có 3 cặp tích vàng mà mọi học sinh lớp 6 đều nên thuộc lòng: 2 · 5 = 10; 4 · 25 = 100; và 8 · 125 = 1 000! Ghép (125 · 8) · 8 001 = 1 000 · 8 001 = 8 001 000 ngay!',
+      tron: 'Còn ở Vận dụng 2: Thay bóng đèn LED cho 32 phòng học (mỗi phòng 8 bóng, mỗi bóng 96 000đ) hết 32 · 8 · 96 000 = 24 576 000 đồng!',
+      hint: 'Mẹo của Anh Pi: Luyện tập 1: 834 · 57 = 47 538; 603 · 295 = 177 885. Vận dụng 1: 350 · 250 = 87 500 đồng!'
+    },
+    bai5_3: {
+      tron: 'Ở Bài 1.29 trang 19, hội trường có ghế băng 5 chỗ ngồi mà cần xếp chỗ cho 997 người. Ta chia 997 : 5 = 199 dư 2 người. Vậy trả lời 199 ghế có đủ không Vuông?',
+      vuong: 'Không đủ đâu! 199 ghế mới xếp được 995 người, còn dư 2 người vẫn phải cần thêm 1 chiếc ghế băng nữa! Vậy phải cần ít nhất 199 + 1 = 200 ghế băng!',
+      pi: 'Rất thực tế! Tương tự ở Bài 1.30, chở 1 290 cổ động viên bằng xe 45 chỗ: vì 1 290 : 45 = 28 dư 30 người nên cần ít nhất 28 + 1 = 29 chuyến xe!',
+      hint: 'Mẹo của Bạn Vuông: Luyện tập 3: 945 : 45 = 21 (dư 0); 3 121 : 51 = 61 (dư 10). Ví dụ 4: 487 : 45 = 10 dư 37 ⇒ cần 11 xe!'
+    },
+    bai5_4: {
+      vuong: 'Ở Bài 1.25 trang 19, làm sao để tính nhẩm 125 · 101 và 21 · 49 bằng tính chất phân phối của phép nhân đối với phép cộng/trừ nhỉ?',
+      tron: 'Mình tách 101 = 100 + 1 nên 125 · 101 = 125 · (100 + 1) = 12 500 + 125 = 12 625! Còn 49 = 50 - 1 nên 21 · 49 = 21 · (50 - 1) = 1 050 - 21 = 1 029!',
+      pi: 'Và với bài tìm x dạng phép chia có dư: x : 15 = 8 (dư 5), ta áp dụng công thức a = b · q + r ⇒ x = 15 · 8 + 5 = 125!',
+      hint: 'Mẹo của Anh Pi: Bài 1.26: Số HS trường nhận nhiều nhất là 50 · 11 · 4 = 2 200 học sinh. Bài 1.27: 1 092 : 91 = 12; 2 059 : 17 = 121 dư 2!'
+    },
+    bai5_5: {
+      tron: 'Trong Tiết 9 Luyện tập chung trang 21, Bài 1.35 tính tiền điện bậc thang cho nhà ông Khánh dùng 115 kWh (số điện) trong tháng!',
+      vuong: '115 số điện được chia vào 3 bậc: Bậc 1 (50 số đầu giá 1 678đ), Bậc 2 (50 số tiếp theo giá 1 734đ) và Bậc 3 còn lại 115 - 50 - 50 = 15 số điện giá 2 014đ!',
+      pi: 'Tổng số tiền điện ông Khánh phải trả là: 50 · 1 678 + 50 · 1 734 + 15 · 2 014 = 83 900 + 86 700 + 30 210 = 200 810 đồng! Qua bài toán này, các em nhớ tắt các thiết bị điện khi không sử dụng để tiết kiệm điện nhé!',
+      hint: 'Mẹo của Bạn Vuông: Bài 1.34: Tổng khối lượng gạo và ngô xe chở là 30 · 50 + 40 · 60 = 1 500 + 2 400 = 3 900 (kg)!'
+    },
+
+    bai6_1: {
+      tron: 'Theo truyền thuyết Ấn Độ về bàn cờ vua 64 ô ở trang 22: Ô thứ nhất đặt 1 hạt thóc, ô thứ hai đặt 2 hạt, ô thứ ba đặt 4 hạt... cứ ô sau gấp đôi ô trước!',
+      vuong: 'Vậy ở ô thứ 7 sẽ có 2⁶ = 64 hạt thóc, ở ô thứ 8 là tích của 7 thừa số 2: 2⁷ = 128 hạt thóc! Đến ô thứ 64 là 2⁶³ hạt thóc, nhiều đến mức phủ kín cả bề mặt Trái Đất!',
+      pi: 'Để viết gọn tích của n thừa số bằng nhau (mỗi thừa số bằng a), người ta dùng kí hiệu lũy thừa aⁿ, trong đó a là cơ số và n là số mũ!',
+      hint: 'Mẹo của Anh Pi: Ô thứ k trên bàn cờ vua có 2^(k-1) hạt thóc: Ô thứ 7 có 2⁶ = 64 hạt, ô thứ 8 có 2⁷ = 128 hạt!'
+    },
+    bai6_2: {
+      vuong: 'Anh Pi ơi, a² còn gọi là a bình phương, a³ gọi là a lập phương. Vậy "số chính phương" là số như thế nào ạ?',
+      pi: 'Số chính phương là số bằng bình phương của một số tự nhiên! Ví dụ 10 số chính phương đầu tiên từ 1² đến 10² là: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100!',
+      tron: 'Và tụi mình còn dùng lũy thừa của 10 để viết cấu tạo số nữa: 23 197 = 2·10⁴ + 3·10³ + 1·10² + 9·10¹ + 7!',
+      hint: 'Mẹo của Bạn Tròn: Lưu ý không bao giờ nhầm aⁿ với a · n nhé (ví dụ 2³ = 2·2·2 = 8 chứ không phải 2·3 = 6)!'
+    },
+    bai6_3: {
+      tron: 'Khi nhân hai lũy thừa cùng cơ số aᵐ · aⁿ thì mình làm thế nào với số mũ nhỉ Vuông?',
+      vuong: 'Nhân cùng cơ số thì GIỮ NGUYÊN CƠ SỐ và CỘNG HAI SỐ MŨ: aᵐ · aⁿ = aᵐ⁺ⁿ! Còn chia cùng cơ số thì TRỪ SỐ MŨ: aᵐ : aⁿ = aᵐ⁻ⁿ!',
+      pi: 'Và các em nhớ hai quy ước vàng: a¹ = a và a⁰ = 1 (với a ≠ 0). Nhờ đó ở Luyện tập 3b, phép chia 1 091¹⁰⁰ : 1 091¹⁰⁰ = 1 091⁰ = 1 ngay lập tức!',
+      hint: 'Mẹo của Bạn Vuông: LT2: 5³ · 5⁷ = 5¹⁰; 2⁴ · 2⁵ · 2⁹ = 2¹⁸; 10² · 10⁴ · 10⁶ · 10⁸ = 10²⁰. LT3a: 7⁶ : 7⁴ = 7²!'
+    },
+    bai6_4: {
+      vuong: 'Ở Bài 1.43 trang 24 có một quy luật cực kỳ đẹp của các số lẻ liên tiếp bắt đầu từ 1: 1 + 3 = 4 = 2²; 1 + 3 + 5 = 9 = 3²!',
+      tron: 'Ồ! Vậy tổng của 4 số lẻ đầu tiên là 1 + 3 + 5 + 7 = 16 = 4², và tổng của 5 số lẻ đầu tiên là 1 + 3 + 5 + 7 + 9 = 25 = 5²!',
+      pi: 'Còn ở Bài 1.41, biết 2¹⁰ = 1 024 thì ta suy ra ngay 2⁹ = 1 024 : 2 = 512 và 2¹¹ = 1 024 · 2 = 2 048!',
+      hint: 'Mẹo của Anh Pi: Bài 1.42: a) 5⁷ · 5³ = 5¹⁰; b) 5⁸ : 5⁴ = 5⁴!'
+    },
+    bai6_5: {
+      tron: 'Ở Bài 1.44 và 1.45 trang 24, lũy thừa giúp các nhà khoa học viết những con số khổng lồ trong Thiên văn học và Sinh học thật gọn gàng!',
+      vuong: 'Bài 1.44: Mặt Trời cần thời gian là (60 · 10²⁰) : (6 · 10⁶) = 10 · 10¹⁴ = 10¹⁵ giây! Còn Bài 1.45: Trong 1 giờ (3 600 giây), tủy xương tạo ra 25 · 10⁵ · 3 600 = 9 · 10⁹ tế bào hồng cầu!',
+      pi: 'Đó chính là lý do lũy thừa của 10 được dùng trong kí hiệu khoa học trên toàn thế giới!',
+      hint: 'Mẹo của Bạn Vuông: 1 giờ = 3 600 giây = 36 · 10² giây ⇒ 25 · 10⁵ · 36 · 10² = 900 · 10⁷ = 9 · 10⁹ tế bào!'
+    },
+
+    bai7_1: {
+      tron: 'Huhu, ở biểu thức mở đầu 5 + 3 × 2 trang 25, mình lấy 5 + 3 = 8 rồi nhân 2 ra 16, thế mà máy tính Casio lại báo kết quả là 11!',
+      vuong: 'Vì đối với biểu thức không có dấu ngoặc, mình phải thực hiện theo đúng thứ tự ưu tiên: Lũy thừa ➔ Nhân và chia ➔ Cộng và trừ! Phải tính 3 × 2 = 6 trước, rồi mới lấy 5 + 6 = 11!',
+      pi: 'Còn nếu biểu thức có dấu ngoặc thì ta thực hiện theo thứ tự: Ngoặc tròn ( ) ➔ Ngoặc vuông [ ] ➔ Ngoặc nhọn { }!',
+      hint: 'Mẹo của Anh Pi: Trong biểu thức 5 + 3 × 2, bạn Vuông tính ra 11 là ĐÚNG!'
+    },
+    bai7_2: {
+      vuong: 'Ở Bài 1.46c trang 26, biểu thức có đủ cả 3 tầng ngoặc: {2³ + [1 + (3 - 1)²]} : 13. Mình bóc từng lớp từ trong ra ngoài nhé!',
+      tron: 'Trong ngoặc tròn: (3 - 1)² = 2² = 4. Trong ngoặc vuông: [1 + 4] = 5. Trong ngoặc nhọn: {8 + 5} = 13. Cuối cùng 13 : 13 = 1! Đẹp mê ly!',
+      pi: 'Và ở câu 1.46b: 14 + 2 · 8² = 14 + 2 · 64 = 14 + 128 = 142. Tuyệt đối không được lấy 14 + 2 = 16 trước đâu nhé!',
+      hint: 'Mẹo của Bạn Tròn: LT1 (tr. 26): a) 25·2³ - 3² + 125 = 200 - 9 + 125 = 316; b) 2·3² + 5·(2 + 3) = 18 + 25 = 43!'
+    },
+    bai7_3: {
+      tron: 'Ở Tiết 13 trang 26, Bài 1.49 tính tổng chi phí bác Cường lát sàn gỗ cho căn hộ 105 m² (trừ bếp và nhà vệ sinh 30 m²)!',
+      vuong: 'Diện tích cần lát gỗ là 105 - 30 = 75 m². Trong đó 18 m² lát gỗ loại 1 (350 nghìn/m²), phần còn lại 75 - 18 = 57 m² lát gỗ loại 2 (170 nghìn/m²), cộng thêm công thợ 30 nghìn/m² cho cả 75 m²!',
+      pi: 'Biểu thức tổng hợp là: 350·18 + 170·[(105 - 30) - 18] + 30·(105 - 30) = 6 300 + 9 690 + 2 250 = 18 240 (nghìn đồng)!',
+      hint: 'Mẹo của Bạn Vuông: LT2: S = 2a² + a, khi a = 3 thì S = 21 cm². Bài 1.47: 1 + 2(25 + 9) - 4³ = 1 + 68 - 64 = 5. Bài 1.48: (1 264 + 164·4) : 12 = 160 chiếc ti vi!'
+    },
+    bai7_4: {
+      vuong: 'Ở Tiết 14 Luyện tập chung trang 27, Bài 1.50b và 1.50c là một cặp bài cực hay để phân biệt khi có ngoặc và không có ngoặc ở phép chia - nhân liền nhau!',
+      pi: 'Đúng thế! Ở câu 1.50b: 2·3² + 24 : 6 · 2, vì phép chia và phép nhân ngang hàng nên ta phải tính TỪ TRÁI SANG PHẢI: 24 : 6 = 4, rồi 4 · 2 = 8 ⇒ 18 + 8 = 26!',
+      tron: 'Còn ở câu 1.50c: 2·3² - 24 : (6 · 2) vì có ngoặc tròn (6 · 2) = 12 nên 24 : 12 = 2 ⇒ 18 - 2 = 16!',
+      hint: 'Mẹo của Anh Pi: Bài 1.52: Diện tích toàn phần hình hộp chữ nhật S = 2(a+b)c + 2ab = 2·(5+4)·3 + 2·5·4 = 54 + 40 = 94 (cm²)!'
+    },
+    bai7_5: {
+      tron: 'Tiết 15-16 Ôn tập cuối Chương I trang 28 có Bài 1.59 về rạp chiếu phim có 18 hàng ghế, mỗi hàng 18 ghế (tổng 18 × 18 = 324 ghế), giá vé 50 000 đồng!',
+      vuong: 'Tối thứ Bảy bán hết vé thu được 324 × 50 000 = 16 200 000 đồng. Tối Chủ nhật còn 41 vé chưa bán nên thu được (324 - 41) × 50 000 = 14 150 000 đồng!',
+      pi: 'Còn tối thứ Hai thu được 10 550 000 đồng, tức là đã bán 10 550 000 : 50 000 = 211 vé ⇒ số vé không bán được là 324 - 211 = 113 vé! Hoàn thành màn này là các em đã chinh phục trọn vẹn Chương I Toán 6 rồi đấy!',
+      hint: 'Mẹo của Bạn Vuông: Bài 1.57: 21 · [(1 245 + 987) : 2³ - 15 · 12] + 21 = 21 · 99 + 21 = 2 100. Bài 1.58: 320 : 45 = 7 dư 5 ⇒ cần thuê 8 xe!'
+    },
+
     bai8_1: {
       tron: 'Lớp 6A được thưởng 50 cái bút rời và thêm 4 hộp bút nữa, mà tụi mình chưa biết mỗi hộp có bao nhiêu cái bút thì làm sao biết có chia đều cho 4 tổ được không nhỉ?',
       vuong: 'Cậu nhìn nhé: 4 hộp bút có số bút mỗi hộp bằng nhau nên tổng số bút trong 4 hộp chắc chắn chia hết cho 4 tổ rồi! Chỉ cần xét xem 50 cái bút rời có chia hết cho 4 không thôi!',
@@ -836,6 +1064,42 @@ const Mascots = {
   }
 };
 
+/* Tự động đồng bộ Thanh điều hướng 12 Bài học (Chương I & Chương II) + Sổ Tay + Tư Vấn trên mọi trang */
+function syncGoogmathNavBar() {
+  const nav = document.querySelector('.lesson-switcher, .googmath-top-nav');
+  if (!nav) return;
+  const isCustomNav = nav.classList.contains('googmath-top-nav');
+  const tabClass = isCustomNav ? 'googmath-nav-tab' : 'lesson-tab';
+
+  const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
+  const items = [
+    { href: 'bai1.html', label: '📘 Bài 1: Tập hợp' },
+    { href: 'bai2.html', label: '🏛️ Bài 2: Ghi số tự nhiên' },
+    { href: 'bai3.html', label: '📏 Bài 3: Thứ tự trong ℕ' },
+    { href: 'bai4.html', label: '➕ Bài 4: Cộng & Trừ' },
+    { href: 'bai5.html', label: '✖️ Bài 5: Nhân & Chia' },
+    { href: 'bai6.html', label: '♟️ Bài 6: Lũy thừa' },
+    { href: 'bai7.html', label: '🧮 Bài 7: Thứ tự phép tính' },
+    { href: 'bai8.html', label: '⚖️ Bài 8: Quan hệ chia hết' },
+    { href: 'bai9.html', label: '🔍 Bài 9: Dấu hiệu chia hết' },
+    { href: 'bai10.html', label: '🌸 Bài 10: Số nguyên tố' },
+    { href: 'index.html', label: '👑 Bài 11: ƯC & ƯCLN' },
+    { href: 'bai12.html', label: '🚀 Bài 12: BC & BCNN' },
+    { href: 'sotay.html', label: '📖 Sổ Tay Toán 6' },
+    { href: 'tuvan.html', label: '💚 Tư Vấn Khối 6' }
+  ];
+
+  nav.innerHTML = `
+    <span style="font-size:0.78rem; color:#fde68a; font-weight:800; margin-right:0.2rem;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
+    ${items.map(it => {
+      const isActive = currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html');
+      return `<a href="${it.href}" class="${tabClass}${isActive ? ' active' : ''}">${it.label}</a>`;
+    }).join('')}
+  `;
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  syncGoogmathNavBar();
   VoiceNarrator.init();
 });
