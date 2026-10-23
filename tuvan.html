@@ -10,24 +10,40 @@
   <link rel="stylesheet" href="./css/tuvan.css" />
 </head>
 <body>
-  <!-- Thanh điều hướng tích hợp GOOGMATH -->
-  <nav class="googmath-top-nav">
-    <span style="font-size:0.78rem; color:#fde68a; font-weight:800;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
-    <a href="bai1.html" class="googmath-nav-tab">📘 Bài 1: Tập hợp</a>
-    <a href="bai2.html" class="googmath-nav-tab">🏛️ Bài 2: Ghi số tự nhiên</a>
-    <a href="bai3.html" class="googmath-nav-tab">📏 Bài 3: Thứ tự trong ℕ</a>
-    <a href="bai4.html" class="googmath-nav-tab">➕ Bài 4: Cộng &amp; Trừ</a>
-    <a href="bai5.html" class="googmath-nav-tab">✖️ Bài 5: Nhân &amp; Chia</a>
-    <a href="bai6.html" class="googmath-nav-tab">♟️ Bài 6: Lũy thừa</a>
-    <a href="bai7.html" class="googmath-nav-tab">🧮 Bài 7: Thứ tự phép tính</a>
-    <a href="bai8.html" class="googmath-nav-tab">⚖️ Bài 8: Quan hệ chia hết</a>
-    <a href="bai9.html" class="googmath-nav-tab">🔍 Bài 9: Dấu hiệu chia hết</a>
-    <a href="bai10.html" class="googmath-nav-tab">🌸 Bài 10: Số nguyên tố</a>
-    <a href="index.html" class="googmath-nav-tab">👑 Bài 11: ƯC &amp; ƯCLN</a>
-    <a href="bai12.html" class="googmath-nav-tab">🚀 Bài 12: BC &amp; BCNN</a>
-    <a href="sotay.html" class="googmath-nav-tab">📖 Sổ Tay Toán 6</a>
-    <a href="tuvan.html" class="googmath-nav-tab active">💚 Tư Vấn Khối 6</a>
+  <!-- Thanh điều hướng tích hợp GOOGMATH (Thu gọn mặc định, nháy chuột mới hiện) -->
+  <nav class="googmath-top-nav" style="justify-content:space-between; padding:0.4rem 1rem; position:relative; z-index:1200;">
+    <div style="display:flex; align-items:center; gap:0.6rem; position:relative;">
+      <a href="index.html" style="font-size:0.82rem; color:#fde68a; font-weight:800; text-decoration:none;">🌐 GOOGMATH • TOÁN 6</a>
+      <button type="button" class="googmath-nav-tab active" style="cursor:pointer;" onclick="const p=document.getElementById('tuvan-nav-panel'); if(p) p.style.display = p.style.display==='block' ? 'none' : 'block'; event.stopPropagation();">
+        📚 Chọn Bài Học (Bài 1 – 12) ▾
+      </button>
+      <div id="tuvan-nav-panel" onclick="event.stopPropagation()" style="display:none; position:absolute; top:calc(100% + 8px); left:0; width:min(640px, 94vw); background:#0f172a; border:1px solid rgba(147,197,253,0.4); border-radius:14px; padding:0.8rem; box-shadow:0 16px 36px rgba(0,0,0,0.65); z-index:2000;">
+        <div style="font-size:0.75rem; font-weight:800; color:#93c5fd; margin-bottom:0.4rem;">📘 CHƯƠNG I (BÀI 1 – BÀI 7)</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:0.35rem; margin-bottom:0.65rem;">
+          <a href="bai1.html" class="googmath-nav-tab">📘 Bài 1: Tập hợp</a>
+          <a href="bai2.html" class="googmath-nav-tab">🏛️ Bài 2: Ghi số tự nhiên</a>
+          <a href="bai3.html" class="googmath-nav-tab">📏 Bài 3: Thứ tự trong ℕ</a>
+          <a href="bai4.html" class="googmath-nav-tab">➕ Bài 4: Cộng &amp; Trừ</a>
+          <a href="bai5.html" class="googmath-nav-tab">✖️ Bài 5: Nhân &amp; Chia</a>
+          <a href="bai6.html" class="googmath-nav-tab">♟️ Bài 6: Lũy thừa</a>
+          <a href="bai7.html" class="googmath-nav-tab">🧮 Bài 7: Thứ tự phép tính</a>
+        </div>
+        <div style="font-size:0.75rem; font-weight:800; color:#f472b6; margin-bottom:0.4rem;">⚖️ CHƯƠNG II (BÀI 8 – BÀI 12)</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:0.35rem;">
+          <a href="bai8.html" class="googmath-nav-tab">⚖️ Bài 8: Quan hệ chia hết</a>
+          <a href="bai9.html" class="googmath-nav-tab">🔍 Bài 9: Dấu hiệu chia hết</a>
+          <a href="bai10.html" class="googmath-nav-tab">🌸 Bài 10: Số nguyên tố</a>
+          <a href="index.html" class="googmath-nav-tab">👑 Bài 11: ƯC &amp; ƯCLN</a>
+          <a href="bai12.html" class="googmath-nav-tab">🚀 Bài 12: BC &amp; BCNN</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; gap:0.45rem; align-items:center;">
+      <a href="sotay.html" class="googmath-nav-tab">📖 Sổ Tay Toán 6</a>
+      <a href="tuvan.html" class="googmath-nav-tab active">💚 Tư Vấn Khối 6</a>
+    </div>
   </nav>
+  <script>document.addEventListener('click',()=>{const p=document.getElementById('tuvan-nav-panel');if(p)p.style.display='none';});</script>
 
   <div class="app-container">
     <!-- Top Header -->

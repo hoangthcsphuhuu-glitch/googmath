@@ -96,25 +96,16 @@
         />
       </div>
 
-      <!-- Khung chọn nhân vật đồng hành Pi, Vuông, Tròn -->
+      <!-- Khung chọn nhân vật đồng hành Pi, Vuông, Tròn (Mặc định thu gọn, nháy chuột mới hiện) -->
       <div id="welcome-companion-slot"></div>
 
       <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
-        <button class="btn btn-primary" style="font-size:1.05rem; padding:0.8rem 1.75rem;" onclick="App.startGame()">
-          👑 Chơi Bài 11: Ước chung & ƯCLN
+        <button class="btn btn-primary" style="font-size:1.05rem; padding:0.8rem 1.85rem;" onclick="App.startGame()">
+          👑 Bắt đầu chơi Bài 11: Ước chung &amp; ƯCLN
         </button>
-        <a href="bai10.html" class="btn btn-accent" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
-          🌸 Bài 10: Số nguyên tố
-        </a>
-        <a href="bai12.html" class="btn btn-purple" style="font-size:1.05rem; padding:0.8rem 1.4rem; text-decoration:none;">
-          🚀 Sang Bài 12: Bội chung & BCNN
-        </a>
-        <a href="sotay.html" class="btn btn-outline" style="text-decoration:none;">
-          📖 Sổ tay hỏi đáp Toán 6
-        </a>
-        <a href="tuvan.html" class="btn btn-outline" style="text-decoration:none; border-color:#10b981; color:#a7f3d0;">
-          💚 Tư vấn Học đường Khối 6
-        </a>
+        <button type="button" class="btn btn-outline" onclick="const c=document.getElementById('home-directory-card'); if(c){c.classList.toggle('open'); if(c.classList.contains('open')) c.scrollIntoView({behavior:'smooth', block:'nearest'});}">
+          📂 Danh mục 12 Bài học &amp; Trợ lý AI ▾
+        </button>
       </div>
     </section>
 
@@ -122,15 +113,13 @@
     <section id="screen-map" style="display:none;">
       <div class="map-header">
         <div>
-          <h2 style="font-size:1.35rem; margin-bottom:0.2rem;">🗺️ Bản Đồ Bài 11: Ước Chung & ƯCLN (5 Trò Chơi)</h2>
+          <h2 style="font-size:1.35rem; margin-bottom:0.2rem;">🗺️ Bản Đồ Bài 11: Ước Chung &amp; ƯCLN (5 Trò Chơi)</h2>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            Mỗi ải tương ứng với một hoạt động trong Kế hoạch bài dạy Bài 11 (SGK Toán 6 trang 44 – 48). Em có thể chuyển sang <strong>Bài 10</strong> hoặc <strong>Bài 12</strong> bất cứ lúc nào!
+            Mỗi ải tương ứng với một hoạt động trong Kế hoạch bài dạy Bài 11 (SGK Toán 6 trang 44 – 48).
           </p>
         </div>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <a href="bai10.html" class="btn btn-accent btn-sm" style="text-decoration:none;">🌸 Về Bài 10 (Số nguyên tố)</a>
-          <a href="bai12.html" class="btn btn-purple btn-sm" style="text-decoration:none;">🚀 Chuyển sang Bài 12 (BC & BCNN)</a>
-          <button class="btn btn-outline btn-sm" onclick="App.changePlayer()">✏️ Đổi tên & Nhân vật</button>
+          <button class="btn btn-outline btn-sm" onclick="App.changePlayer()">✏️ Đổi tên &amp; Nhân vật</button>
           <button class="btn btn-outline btn-sm" onclick="App.resetProgress()">🔄 Chơi lại từ đầu</button>
         </div>
       </div>
@@ -141,40 +130,44 @@
       <div id="certificate-section"></div>
     </section>
 
-    <!-- Danh mục Cổng Trò Chơi Toán 6 (Bài 1 -> Bài 12) ngay tại Trang Chủ -->
-    <section class="step-card" style="margin-top:1.4rem; border:1px solid rgba(251,191,36,0.35); background:rgba(15,23,42,0.75);">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.85rem;">
+    <!-- Danh mục Cổng Trò Chơi Toán 6 (Bài 1 -> Bài 12) - Thu gọn mặc định, nháy chuột mới hiện -->
+    <section class="collapsible-card" id="home-directory-card">
+      <button type="button" class="collapsible-header" onclick="document.getElementById('home-directory-card').classList.toggle('open')">
+        <span>🏫 CỔNG TRANG CHỦ GOOGMATH • DANH MỤC 12 BÀI HỌC &amp; TRỢ LÝ AI (Nháy chuột để mở / thu gọn)</span>
+        <span class="collapsible-arrow">▾</span>
+      </button>
+
+      <div class="collapsible-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.85rem;">
+          <p style="font-size:0.84rem; color:var(--text-muted);">GV: Lý Hoàng Em • Tích hợp Kế hoạch bài dạy Tuần 01 đến Tuần 07 (Có nhạc nền &amp; đọc câu dẫn Tiếng Việt)</p>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a href="sotay.html" class="btn btn-accent btn-sm" style="text-decoration:none;">📖 Sổ Tay Hỏi Đáp Toán 6</a>
+            <a href="tuvan.html" class="btn btn-success btn-sm" style="text-decoration:none;">💚 Tư Vấn Học Đường Khối 6</a>
+          </div>
+        </div>
+
+        <div style="margin-bottom:0.9rem;">
+          <div style="font-size:0.85rem; font-weight:800; color:#93c5fd; margin-bottom:0.5rem;">📘 CHƯƠNG I: TẬP HỢP CÁC SỐ TỰ NHIÊN (TUẦN 01 – TUẦN 04 • TIẾT 1 ĐẾN TIẾT 16)</div>
+          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.55rem;">
+            <a href="bai1.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">📘 Bài 1: Tập hợp (Tiết 1)</a>
+            <a href="bai2.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🏛️ Bài 2: Cách ghi số tự nhiên (Tiết 2–3)</a>
+            <a href="bai3.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">📏 Bài 3: Thứ tự trong ℕ (Tiết 4)</a>
+            <a href="bai4.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">➕ Bài 4: Phép cộng &amp; Phép trừ (Tiết 5–6)</a>
+            <a href="bai5.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">✖️ Bài 5: Nhân, Chia &amp; LTC (Tiết 7–9)</a>
+            <a href="bai6.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">♟️ Bài 6: Lũy thừa số mũ tự nhiên (Tiết 10–11)</a>
+            <a href="bai7.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🧮 Bài 7: Thứ tự phép tính &amp; Ôn tập Chương I</a>
+          </div>
+        </div>
+
         <div>
-          <h3 style="color:#fde68a; font-size:1.15rem; margin-bottom:0.2rem;">🏫 CỔNG TRANG CHỦ GOOGMATH • TRỌN BỘ TRÒ CHƠI TOÁN 6 (BÀI 1 ĐẾN BÀI 12)</h3>
-          <p style="font-size:0.85rem; color:var(--text-muted);">GV: Lý Hoàng Em • Tích hợp Kế hoạch bài dạy Tuần 01 đến Tuần 07 (Có nhạc nền &amp; đọc câu dẫn Tiếng Việt)</p>
-        </div>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <a href="sotay.html" class="btn btn-accent btn-sm" style="text-decoration:none;">📖 Sổ Tay Hỏi Đáp Toán 6</a>
-          <a href="tuvan.html" class="btn btn-success btn-sm" style="text-decoration:none;">💚 Tư Vấn Học Đường Khối 6</a>
-        </div>
-      </div>
-
-      <div style="margin-bottom:0.9rem;">
-        <div style="font-size:0.85rem; font-weight:800; color:#93c5fd; margin-bottom:0.5rem;">📘 CHƯƠNG I: TẬP HỢP CÁC SỐ TỰ NHIÊN (TUẦN 01 – TUẦN 04 • TIẾT 1 ĐẾN TIẾT 16)</div>
-        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.55rem;">
-          <a href="bai1.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">📘 Bài 1: Tập hợp (Tiết 1)</a>
-          <a href="bai2.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🏛️ Bài 2: Cách ghi số tự nhiên (Tiết 2–3)</a>
-          <a href="bai3.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">📏 Bài 3: Thứ tự trong ℕ (Tiết 4)</a>
-          <a href="bai4.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">➕ Bài 4: Phép cộng &amp; Phép trừ (Tiết 5–6)</a>
-          <a href="bai5.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">✖️ Bài 5: Nhân, Chia &amp; LTC (Tiết 7–9)</a>
-          <a href="bai6.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">♟️ Bài 6: Lũy thừa số mũ tự nhiên (Tiết 10–11)</a>
-          <a href="bai7.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🧮 Bài 7: Thứ tự phép tính &amp; Ôn tập Chương I</a>
-        </div>
-      </div>
-
-      <div>
-        <div style="font-size:0.85rem; font-weight:800; color:#f472b6; margin-bottom:0.5rem;">⚖️ CHƯƠNG II: TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN (TUẦN 05 – TUẦN 07 • TIẾT 17 ĐẾN TIẾT 28)</div>
-        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.55rem;">
-          <a href="bai8.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">⚖️ Bài 8: Quan hệ chia hết &amp; Tính chất</a>
-          <a href="bai9.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🔍 Bài 9: Dấu hiệu chia hết (2, 5, 9, 3)</a>
-          <a href="bai10.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🌸 Bài 10: Số nguyên tố &amp; Luyện tập chung</a>
-          <a href="index.html" class="btn btn-primary btn-sm" style="text-decoration:none; justify-content:flex-start;">👑 Bài 11: Ước chung &amp; ƯCLN (Trang hiện tại)</a>
-          <a href="bai12.html" class="btn btn-purple btn-sm" style="text-decoration:none; justify-content:flex-start;">🚀 Bài 12: Bội chung &amp; BCNN</a>
+          <div style="font-size:0.85rem; font-weight:800; color:#f472b6; margin-bottom:0.5rem;">⚖️ CHƯƠNG II: TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN (TUẦN 05 – TUẦN 07 • TIẾT 17 ĐẾN TIẾT 28)</div>
+          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.55rem;">
+            <a href="bai8.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">⚖️ Bài 8: Quan hệ chia hết &amp; Tính chất</a>
+            <a href="bai9.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🔍 Bài 9: Dấu hiệu chia hết (2, 5, 9, 3)</a>
+            <a href="bai10.html" class="btn btn-outline btn-sm" style="text-decoration:none; justify-content:flex-start;">🌸 Bài 10: Số nguyên tố &amp; Luyện tập chung</a>
+            <a href="index.html" class="btn btn-primary btn-sm" style="text-decoration:none; justify-content:flex-start;">👑 Bài 11: Ước chung &amp; ƯCLN (Trang hiện tại)</a>
+            <a href="bai12.html" class="btn btn-purple btn-sm" style="text-decoration:none; justify-content:flex-start;">🚀 Bài 12: Bội chung &amp; BCNN</a>
+          </div>
         </div>
       </div>
     </section>

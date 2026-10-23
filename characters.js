@@ -939,7 +939,23 @@ const Mascots = {
     });
     this.updateHUDCompanion();
     const c = this.getSelected();
+    const labelEl = document.getElementById('companion-selected-label');
+    if (labelEl) {
+      labelEl.innerHTML = `🌟 Nhân vật đồng hành: <strong>${c.name}</strong> (${c.role})`;
+    }
+    const gridEl = document.getElementById('companion-picker-grid');
+    if (gridEl) {
+      gridEl.classList.remove('open');
+    }
     VoiceNarrator.speak(`Xin chào! Mình là ${c.name}, ${c.role}. Chúng mình cùng chinh phục thử thách Toán 6 nhé!`, id);
+  },
+
+  togglePicker() {
+    if (typeof Sound !== 'undefined') Sound.click();
+    const gridEl = document.getElementById('companion-picker-grid');
+    if (gridEl) {
+      gridEl.classList.toggle('open');
+    }
   },
 
   getSelected() {
@@ -956,10 +972,14 @@ const Mascots = {
   },
 
   renderPickerHTML() {
+    const cur = this.getSelected();
     return `
       <div class="companion-picker">
-        <div class="companion-picker-title">🌟 Chọn Nhân Vật Đồng Hành Cùng Em (Bấm để nghe giọng chào Tiếng Việt):</div>
-        <div class="companion-grid">
+        <button type="button" class="companion-toggle-btn" onclick="Mascots.togglePicker()" title="Nháy chuột để chọn hoặc đổi nhân vật đồng hành">
+          <span id="companion-selected-label">🌟 Nhân vật đồng hành: <strong>${cur.name}</strong> (${cur.role})</span>
+          <span style="font-size:0.78rem; color:#93c5fd;">Nháy để đổi ▾</span>
+        </button>
+        <div class="companion-grid" id="companion-picker-grid">
           ${Object.values(this.info).map(c => `
             <div class="companion-card ${this.selectedId === c.id ? 'selected' : ''}"
                  data-mascot="${c.id}"
@@ -972,6 +992,16 @@ const Mascots = {
         </div>
       </div>
     `;
+  },
+
+  toggleDialogue() {
+    if (typeof Sound !== 'undefined') Sound.click();
+    const chatList = document.getElementById('mascot-chat-list');
+    const arrow = document.getElementById('mascot-dialogue-arrow');
+    if (chatList) {
+      const isOpen = chatList.classList.toggle('open');
+      if (arrow) arrow.textContent = isOpen ? '▴ Thu gọn' : '▾ Xem hội thoại';
+    }
   },
 
   injectDialogue(lessonKey, stageId) {
@@ -995,18 +1025,21 @@ const Mascots = {
 
     wrapper.innerHTML = `
       <div class="mascot-dialogue-header">
-        <span class="mascot-dialogue-title">💬 Góc Thảo Luận Cùng Pi (π) • Vuông (🟦) • Tròn (🟠)</span>
-        <div style="display:flex; gap:0.45rem; align-items:center; flex-wrap:wrap;">
+        <button type="button" class="mascot-dialogue-toggle" onclick="Mascots.toggleDialogue()" title="Nháy chuột để hiện hoặc thu gọn cuộc trò chuyện">
+          <span>💬 Góc Thảo Luận: Pi (π) • Vuông (🟦) • Tròn (🟠)</span>
+          <span id="mascot-dialogue-arrow" style="font-size:0.76rem; color:#fde68a; background:rgba(255,255,255,0.08); padding:0.15rem 0.55rem; border-radius:999px;">▾ Xem hội thoại</span>
+        </button>
+        <div style="display:flex; gap:0.4rem; align-items:center; flex-wrap:wrap;">
           <button type="button" class="tts-btn tts-sm" onclick="VoiceNarrator.readDialogue('${lessonKey}', ${stageId})">
-            🔊 Đọc hội thoại 3 nhân vật
+            🔊 Nghe hội thoại
           </button>
           <button type="button" class="btn btn-accent btn-sm" onclick="Mascots.toggleHint('${safeHint}')">
-            💡 Hỏi gợi ý từ ${companion.shortName}
+            💡 Gợi ý (${companion.shortName})
           </button>
         </div>
       </div>
 
-      <div class="mascot-chat-list">
+      <div class="mascot-chat-list" id="mascot-chat-list">
         <div class="mascot-chat-item char-vuong">
           <div class="mascot-chat-avatar">${this.info.vuong.svg}</div>
           <div class="mascot-chat-content">
@@ -1064,42 +1097,170 @@ const Mascots = {
   }
 };
 
-/* Tự động đồng bộ Thanh điều hướng 12 Bài học (Chương I & Chương II) + Sổ Tay + Tư Vấn trên mọi trang */
+/* Tự động đồng bộ Thanh điều hướng gọn nhẹ (Nháy chuột mới hiện danh sách 12 bài học) */
 function syncGoogmathNavBar() {
   const nav = document.querySelector('.lesson-switcher, .googmath-top-nav');
   if (!nav) return;
-  const isCustomNav = nav.classList.contains('googmath-top-nav');
-  const tabClass = isCustomNav ? 'googmath-nav-tab' : 'lesson-tab';
 
   const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
-  const items = [
+  const ch1Items = [
     { href: 'bai1.html', label: '📘 Bài 1: Tập hợp' },
     { href: 'bai2.html', label: '🏛️ Bài 2: Ghi số tự nhiên' },
     { href: 'bai3.html', label: '📏 Bài 3: Thứ tự trong ℕ' },
     { href: 'bai4.html', label: '➕ Bài 4: Cộng & Trừ' },
     { href: 'bai5.html', label: '✖️ Bài 5: Nhân & Chia' },
     { href: 'bai6.html', label: '♟️ Bài 6: Lũy thừa' },
-    { href: 'bai7.html', label: '🧮 Bài 7: Thứ tự phép tính' },
+    { href: 'bai7.html', label: '🧮 Bài 7: Thứ tự phép tính' }
+  ];
+
+  const ch2Items = [
     { href: 'bai8.html', label: '⚖️ Bài 8: Quan hệ chia hết' },
     { href: 'bai9.html', label: '🔍 Bài 9: Dấu hiệu chia hết' },
     { href: 'bai10.html', label: '🌸 Bài 10: Số nguyên tố' },
-    { href: 'index.html', label: '👑 Bài 11: ƯC & ƯCLN' },
-    { href: 'bai12.html', label: '🚀 Bài 12: BC & BCNN' },
-    { href: 'sotay.html', label: '📖 Sổ Tay Toán 6' },
-    { href: 'tuvan.html', label: '💚 Tư Vấn Khối 6' }
+    { href: 'index.html', label: '👑 Bài 11: Ước chung & ƯCLN' },
+    { href: 'bai12.html', label: '🚀 Bài 12: Bội chung & BCNN' }
   ];
 
+  const aiItems = [
+    { href: 'sotay.html', label: '📖 Sổ Tay Hỏi Đáp Toán 6' },
+    { href: 'tuvan.html', label: '💚 Tư Vấn Học Đường Khối 6' }
+  ];
+
+  const allItems = [...ch1Items, ...ch2Items, ...aiItems];
+  const activeItem = allItems.find(
+    it => currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html')
+  ) || ch2Items[3];
+
+  const renderLinks = (list) => list.map(it => {
+    const isActive = currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html');
+    return `<a href="${it.href}" class="lesson-tab${isActive ? ' active' : ''}" style="justify-content:flex-start;">${it.label}</a>`;
+  }).join('');
+
   nav.innerHTML = `
-    <span style="font-size:0.78rem; color:#fde68a; font-weight:800; margin-right:0.2rem;">🌐 GOOGMATH • TOÁN 6 (GV: LÝ HOÀNG EM):</span>
-    ${items.map(it => {
-      const isActive = currentFile === it.href.toLowerCase() || (currentFile === '' && it.href === 'index.html');
-      return `<a href="${it.href}" class="${tabClass}${isActive ? ' active' : ''}">${it.label}</a>`;
-    }).join('')}
+    <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+      <a href="index.html" class="nav-brand-mini" title="Về Trang Chủ GoogMath">
+        🌐 GOOGMATH • TOÁN 6
+      </a>
+      <div class="nav-dropdown-wrapper" id="nav-lesson-dropdown">
+        <button type="button" class="nav-dropdown-btn" onclick="toggleGoogmathMenu(event)" title="Nháy chuột để mở hoặc thu gọn danh sách 12 bài học">
+          <span>📚 ${activeItem.label}</span>
+          <span id="nav-dropdown-caret">▾ Chọn bài</span>
+        </button>
+        <div class="nav-dropdown-panel" id="nav-dropdown-panel">
+          <div class="nav-chapter-group">
+            <div class="nav-chapter-title">📘 Chương I: Tập hợp các số tự nhiên (Bài 1 – Bài 7)</div>
+            <div class="nav-chapter-grid">${renderLinks(ch1Items)}</div>
+          </div>
+          <div class="nav-chapter-group">
+            <div class="nav-chapter-title" style="color:#f472b6;">⚖️ Chương II: Tính chia hết trong ℕ (Bài 8 – Bài 12)</div>
+            <div class="nav-chapter-grid">${renderLinks(ch2Items)}</div>
+          </div>
+          <div class="nav-chapter-group">
+            <div class="nav-chapter-title" style="color:#34d399;">🤖 Trợ Lý AI &amp; Tư Vấn Học Đường</div>
+            <div class="nav-chapter-grid">${renderLinks(aiItems)}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-compact-actions">
+      <a href="sotay.html" class="lesson-tab${currentFile === 'sotay.html' ? ' active' : ''}">📖 Sổ Tay</a>
+      <a href="tuvan.html" class="lesson-tab${currentFile === 'tuvan.html' ? ' active' : ''}">💚 Tư Vấn</a>
+    </div>
   `;
 }
 
+function toggleGoogmathMenu(e) {
+  if (e) e.stopPropagation();
+  const panel = document.getElementById('nav-dropdown-panel');
+  const caret = document.getElementById('nav-dropdown-caret');
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  if (caret) caret.textContent = isOpen ? '▴ Thu gọn' : '▾ Chọn bài';
+}
+
+function toggleHudToolsMenu(e) {
+  if (e) e.stopPropagation();
+  const panel = document.getElementById('hud-dropdown-panel');
+  const caret = document.getElementById('hud-dropdown-caret');
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  if (caret) caret.textContent = isOpen ? '▴' : '▾';
+}
+
+/* Thu gọn thanh HUD (Âm thanh, Nhạc nền, Đọc câu dẫn, Máy tính) vào 1 nút bấm duy nhất */
+function simplifyHudBar() {
+  const hudBar = document.querySelector('.hud-bar');
+  if (!hudBar || document.getElementById('hud-tools-wrapper')) return;
+
+  const hudStats = hudBar.querySelector('.hud-stats');
+  const hudActions = hudBar.querySelector('.hud-actions');
+  if (!hudStats && !hudActions) return;
+
+  const voicePill = document.getElementById('voice-pill');
+  const bgmPill = document.getElementById('bgm-pill');
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'hud-dropdown-wrapper';
+  wrapper.id = 'hud-tools-wrapper';
+
+  wrapper.innerHTML = `
+    <button type="button" class="hud-dropdown-btn" onclick="toggleHudToolsMenu(event)" title="Nháy chuột để mở cài đặt Âm thanh, Nhạc nền & Công cụ">
+      <span>⚙️ Công cụ &amp; Âm thanh</span>
+      <span id="hud-dropdown-caret">▾</span>
+    </button>
+    <div class="hud-dropdown-panel" id="hud-dropdown-panel" onclick="event.stopPropagation()"></div>
+  `;
+
+  const panel = wrapper.querySelector('#hud-dropdown-panel');
+
+  if (voicePill) panel.appendChild(voicePill);
+  if (bgmPill) panel.appendChild(bgmPill);
+
+  if (hudActions) {
+    Array.from(hudActions.children).forEach(child => {
+      // Giữ lại các nút công cụ (Máy tính, Sổ tay, Âm thanh) trong menu thu gọn
+      panel.appendChild(child);
+    });
+    hudActions.innerHTML = '';
+    hudActions.appendChild(wrapper);
+  } else if (hudStats) {
+    hudStats.appendChild(wrapper);
+  }
+
+  // Thu gọn các nút chuyển bài phụ trên màn hình Chào mừng & Bản đồ ở tất cả các bài (Bài 1 -> Bài 12)
+  const welcomeScreen = document.getElementById('screen-welcome');
+  if (welcomeScreen) {
+    welcomeScreen.querySelectorAll('a.btn').forEach(a => a.remove());
+  }
+  const mapHeader = document.querySelector('#screen-map .map-header');
+  if (mapHeader) {
+    mapHeader.querySelectorAll('a.btn').forEach(a => a.remove());
+  }
+}
+
+/* Tự động đóng các menu khi nháy chuột ra ngoài */
+document.addEventListener('click', (e) => {
+  const navPanel = document.getElementById('nav-dropdown-panel');
+  const navWrapper = document.getElementById('nav-lesson-dropdown');
+  if (navPanel && navPanel.classList.contains('open') && navWrapper && !navWrapper.contains(e.target)) {
+    navPanel.classList.remove('open');
+    const caret = document.getElementById('nav-dropdown-caret');
+    if (caret) caret.textContent = '▾ Chọn bài';
+  }
+
+  const hudPanel = document.getElementById('hud-dropdown-panel');
+  const hudWrapper = document.getElementById('hud-tools-wrapper');
+  if (hudPanel && hudPanel.classList.contains('open') && hudWrapper && !hudWrapper.contains(e.target)) {
+    hudPanel.classList.remove('open');
+    const caret = document.getElementById('hud-dropdown-caret');
+    if (caret) caret.textContent = '▾';
+  }
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   syncGoogmathNavBar();
+  simplifyHudBar();
   VoiceNarrator.init();
 });
