@@ -30,6 +30,9 @@
       <div class="stat-pill" id="hud-player">👤 Khách</div>
       <div class="stat-pill score">🏆 <span id="hud-score">0</span> điểm</div>
       <div class="stat-pill stars">⭐ <span id="hud-stars">0</span>/15 sao</div>
+      <div class="voice-pill" id="voice-pill" onclick="VoiceNarrator.toggle()" title="Bật/Tắt tự động đọc câu dẫn & lời thoại trong trò chơi">
+        <span id="voice-label">🗣️ Đọc câu dẫn: Bật</span>
+      </div>
       <div class="bgm-pill" id="bgm-pill" onclick="BGM.toggle()" title="Bật/Tắt nhạc nền của trò chơi">
         <div class="eq-bars">
           <span class="eq-bar"></span>
@@ -60,7 +63,12 @@
   <main class="main-container">
     <!-- 1. Welcome / Login Screen -->
     <section id="screen-welcome" class="hero-card">
-      <span class="hero-badge">✨ KẾ HOẠCH BÀI DẠY TOÁN 6 - TIẾT 25, 26, 27 ✨</span>
+      <div style="display:flex; justify-content:center; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+        <span class="hero-badge" style="margin-bottom:0;">✨ KẾ HOẠCH BÀI DẠY TOÁN 6 - TIẾT 25, 26, 27 ✨</span>
+        <button class="tts-btn" onclick="VoiceNarrator.speak('Chào mừng em đến với Vương quốc Ước Chung của Bài 11: Ước chung và Ước chung lớn nhất! Hãy chọn người bạn đồng hành Pi, Vuông hoặc Tròn, nhập họ tên và bắt đầu vượt qua 5 ải thử thách từ Xưởng Mộc Thông Thái đến Mật Mã Ơ-clít Cổ Đại nhé!')">
+          🔊 Đọc lời dẫn mở đầu
+        </button>
+      </div>
       <h2>CHINH PHỤC VƯƠNG QUỐC ƯỚC CHUNG</h2>
       <p>
         Chào mừng em đến với trò chơi học tập <strong>Bài 11: Ước chung. Ước chung lớn nhất</strong>!

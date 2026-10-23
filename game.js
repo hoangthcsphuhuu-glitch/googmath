@@ -306,6 +306,7 @@ const App = {
 
   showMap() {
     Sound.click();
+    if (typeof VoiceNarrator !== 'undefined') VoiceNarrator.stop();
     BGM.playTrack('map');
     document.getElementById('screen-welcome').style.display = 'none';
     document.getElementById('screen-stage').style.display = 'none';
